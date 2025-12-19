@@ -100,7 +100,7 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [statsInView, setStatsInView] = useState(false);
   const { scrollY } = useScroll();
-  const heroOpacity = useTransform(scrollY, [0, 300], [1, 0]);
+  const heroOpacity = useTransform(scrollY, [0, 1200], [1, 0]);
   const heroY = useTransform(scrollY, [0, 300], [0, -100]);
 
   const statsRef = useRef(null);
@@ -150,7 +150,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-gray-900 selection:bg-primary/20 selection:text-primary" style={{ fontFamily: BRAND.fonts.body }}>
+    <div className="min-h-screen bg-white text-gray-900 selection:bg-primary/20 selection:text-primary overflow-x-hidden" style={{ fontFamily: BRAND.fonts.body }}>
       {/* Custom Navigation Header */}
       <motion.header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
@@ -280,10 +280,10 @@ export default function Home() {
               style={{ fontFamily: BRAND.fonts.heading }}
               variants={itemVariants}
             >
-              <span className="block text-5xl md:text-7xl lg:text-8xl font-bold text-neutral-900">
+              <span className="block text-4xl md:text-6xl lg:text-8xl font-bold text-neutral-900">
                 Corporate Identity
               </span>
-              <span className="block text-5xl md:text-7xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-accent">
+              <span className="block text-4xl md:text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-accent">
                 Through Precision Apparel
               </span>
             </motion.h1>
@@ -384,7 +384,7 @@ export default function Home() {
       {/* For Procurement & HR Teams - B2B Focused Section */}
       <section className="bg-gradient-to-b from-white to-neutral-50/50 py-16 border-y border-neutral-200/30">
         <div className="container mx-auto px-4">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-5 items-center max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -396,29 +396,29 @@ export default function Home() {
                 <Timer className="w-4 h-4 text-neutral-400" />
                 <span className="text-sm text-neutral-500">SLA-driven workflow</span>
               </div>
-              <h3 className="text-2xl font-bold text-neutral-900 mb-4" style={{ fontFamily: BRAND.fonts.heading }}>
+              <h3 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
                 Streamlined Corporate Ordering Process
               </h3>
               <div className="space-y-4">
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-6 h-6 text-accent mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-neutral-800">Dedicated Account Management</h4>
-                    <p className="text-sm text-neutral-600 mt-1">Single point of contact for all communication and updates</p>
+                    <h4 className="text-xl font-semibold text-neutral-800">Dedicated Account Management</h4>
+                    <p className="text-base text-neutral-600 mt-1">Single point of contact for all communication and updates</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-6 h-6 text-accent mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-neutral-800">GST-Compliant Documentation</h4>
-                    <p className="text-sm text-neutral-600 mt-1">Complete invoice, delivery challan, and tax compliance</p>
+                    <h4 className="text-xl font-semibold text-neutral-800">GST-Compliant Documentation</h4>
+                    <p className="text-base text-neutral-600 mt-1">Complete invoice, delivery challan, and tax compliance</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
-                  <CheckCircle className="w-5 h-5 text-accent mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-6 h-6 text-accent mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-neutral-800">Multi-Location Delivery Coordination</h4>
-                    <p className="text-sm text-neutral-600 mt-1">Bulk shipments routed to offices, stores, or warehouses nationwide</p>
+                    <h4 className="text-xl font-semibold text-neutral-800">Multi-Location Delivery Coordination</h4>
+                    <p className="text-base text-neutral-600 mt-1">Bulk shipments routed to offices, stores, or warehouses nationwide</p>
                   </div>
                 </div>
               </div>
@@ -996,13 +996,6 @@ export default function Home() {
                       <p className="text-xs text-neutral-500 italic">
                         Challenge: {project.challenge}
                       </p>
-                    </div>
-
-                    <div className="mt-6 pt-4 border-t border-neutral-200/30">
-                      <button className="text-sm text-primary font-semibold flex items-center group/btn">
-                        View project details
-                        <ArrowUpRight className="w-4 h-4 ml-2 transform transition-transform group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
-                      </button>
                     </div>
                   </CardContent>
                 </Card>
