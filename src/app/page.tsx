@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import dynamic from 'next/dynamic';
 
 // Dynamically import CountUp to avoid SSR issues
@@ -121,6 +122,38 @@ export default function Home() {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  // Popup State
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupForm, setPopupForm] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    requirement: '',
+    quantity: '',
+    qtyUnit: 'units',
+    details: ''
+  });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsPopupOpen(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const handlePopupSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const text = `*New Corporate Enquiry*\n\n*Name:* ${popupForm.name}\n*Company:* ${popupForm.company}\n*Email:* ${popupForm.email}\n*Phone:* ${popupForm.phone}\n*Requirement:* ${popupForm.requirement}\n*Quantity:* ${popupForm.quantity} ${popupForm.qtyUnit}\n*Details:* ${popupForm.details}`;
+    const url = `https://wa.me/918238636766?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+    setIsPopupOpen(false);
+  };
+
+  const handlePopupChange = (field: string, value: string) => {
+    setPopupForm(prev => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -1427,6 +1460,118 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      <Dialog open={isPopupOpen} onOpenChange={setIsPopupOpen}>
+        <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
+              Get Your Custom Quote
+            </DialogTitle>
+            <DialogDescription>
+              Tell us about your requirements and we'll connect you with a specialist immediately.
+            </DialogDescription>
+          </DialogHeader>
+          <form onSubmit={handlePopupSubmit} className="space-y-4 mt-2">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-medium text-neutral-700 mb-1">Name *</label>
+                <Input
+                  value={popupForm.name}
+                  onChange={(e) => handlePopupChange('name', e.target.value)}
+                  placeholder="Full Name"
+                  required
+                  className="h-9"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-neutral-700 mb-1">Company *</label>
+                <Input
+                  value={popupForm.company}
+                  onChange={(e) => handlePopupChange('company', e.target.value)}
+                  placeholder="Organization"
+                  required
+                  className="h-9"
+                />
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <label className="block text-xs font-medium text-neutral-700 mb-1">Email *</label>
+                <Input
+                  value={popupForm.email}
+                  onChange={(e) => handlePopupChange('email', e.target.value)}
+                  type="email"
+                  placeholder="work@email.com"
+                  required
+                  className="h-9"
+                />
+              </div>
+              <div>
+                <label className="block text-xs font-medium text-neutral-700 mb-1">Phone *</label>
+                <Input
+                  value={popupForm.phone}
+                  onChange={(e) => handlePopupChange('phone', e.target.value)}
+                  placeholder="+91..."
+                  required
+                  className="h-9"
+                />
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-neutral-700 mb-1">Requirement *</label>
+              <Select onValueChange={(val) => handlePopupChange('requirement', val)}>
+                <SelectTrigger className="h-9">
+                  <SelectValue placeholder="Select type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="corporate">Corporate Uniforms</SelectItem>
+                  <SelectItem value="promotional">Promotional Wear</SelectItem>
+                  <SelectItem value="workwear">Industrial Workwear</SelectItem>
+                  <SelectItem value="custom">Custom Need</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-neutral-700 mb-1">Approx. Quantity</label>
+              <div className="flex space-x-2">
+                <Input
+                  value={popupForm.quantity}
+                  onChange={(e) => handlePopupChange('quantity', e.target.value)}
+                  placeholder="Qty"
+                  className="h-9"
+                />
+                <Select value={popupForm.qtyUnit} onValueChange={(val) => handlePopupChange('qtyUnit', val)}>
+                  <SelectTrigger className="w-32 h-9">
+                    <SelectValue placeholder="Unit" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="units">Units</SelectItem>
+                    <SelectItem value="sets">Sets</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-xs font-medium text-neutral-700 mb-1">Details</label>
+              <Textarea
+                value={popupForm.details}
+                onChange={(e) => handlePopupChange('details', e.target.value)}
+                placeholder="Specific requirements..."
+                rows={3}
+                className="resize-none"
+              />
+            </div>
+
+            <Button type="submit" className="w-full bg-green-600 hover:bg-green-700 text-white">
+              <MessageCircle className="w-4 h-4 mr-2" />
+              Submit via WhatsApp
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
