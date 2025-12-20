@@ -217,7 +217,7 @@ export default function Home() {
 
               <div>
                 <span className="font-bold text-xl leading-tight block text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>Rekha Garments</span>
-                <span className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium block border-l-2 border-accent pl-2">Est. 1995 • Vadodara</span>
+                <span className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium block border-l-2 border-accent pl-2">Est. 2004 • Vadodara</span>
               </div>
             </motion.div>
 
@@ -304,7 +304,7 @@ export default function Home() {
               </Badge>
               <div className="flex items-center justify-center space-x-2 text-sm text-neutral-600">
                 <Building className="w-4 h-4" />
-                <span>Vadodara-based manufacturing since 1995</span>
+                <span>Vadodara-based manufacturing since 2004</span>
               </div>
             </motion.div>
 
@@ -379,10 +379,10 @@ export default function Home() {
               variants={itemVariants}
             >
               {[
-                { value: 2850000, label: "Annual Production Capacity", suffix: "+ units" },
-                { value: 517, label: "Enterprise Clients", suffix: "+" },
+                { value: 3800000, label: "Annual Production Capacity", suffix: "+ units" },
+                { value: 942, label: "Enterprise Clients", suffix: "+" },
                 { value: 98.7, label: "On-Time Delivery Rate", suffix: "%" },
-                { value: 28, label: "Years Manufacturing", suffix: "+" },
+                { value: 21, label: "Years Manufacturing", suffix: "+" },
               ].map((stat, i) => (
                 <div key={i} className="text-center p-4 rounded-xl bg-white/50 backdrop-blur-sm border border-neutral-200/30">
                   <div className="font-bold text-3xl text-primary mb-1" style={{ fontFamily: BRAND.fonts.heading }}>
@@ -482,8 +482,8 @@ export default function Home() {
                 </div>
                 <div className="bg-gradient-to-br from-neutral-50 to-white p-4 rounded-xl border border-neutral-200/30">
                   <TruckIcon className="w-8 h-8 text-neutral-600 mb-2" />
-                  <h4 className="font-bold text-neutral-900 text-sm">Tracked Dispatch</h4>
-                  <p className="text-xs text-neutral-600 mt-1">Real-time tracking with POD confirmation</p>
+                  <h4 className="font-bold text-neutral-900 text-sm">Timely Dispatch</h4>
+                  <p className="text-xs text-neutral-600 mt-1">Timely dispatch of orders with real-time tracking</p>
                 </div>
               </div>
               <div className="mt-6 pt-6 border-t border-neutral-200/30">
@@ -636,7 +636,7 @@ export default function Home() {
                 <h3 className="text-xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>Our Production Flow</h3>
                 <div className="relative">
                   <div className="flex items-center justify-between mb-8">
-                    {['Fabric', 'Cutting', 'Stitching', 'QC', 'Pack'].map((step, i) => (
+                    {['Fabric', 'Cutting', 'Stitching', 'QC', 'Printing', 'Pack'].map((step, i) => (
                       <div key={i} className="flex flex-col items-center">
                         <div className="w-10 h-10 rounded-full bg-white border-2 border-primary/20 flex items-center justify-center mb-2">
                           <span className="text-sm font-bold text-primary">{i + 1}</span>
@@ -666,121 +666,6 @@ export default function Home() {
                 </div>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Solutions Section - Rich Tiles */}
-      <section id="solutions" className="py-24 bg-gradient-to-b from-neutral-50/50 to-white">
-        <div className="container mx-auto px-4">
-          <motion.div
-            className="text-center max-w-3xl mx-auto mb-16"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <Badge className="mb-4 bg-white text-neutral-800 border-neutral-200/50 shadow-sm">Specialized Solutions</Badge>
-            <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
-              Industry-Specific Apparel Programs
-            </h2>
-            <p className="text-lg text-neutral-600">
-              Tailored manufacturing lines designed for specific corporate needs and procurement workflows.
-            </p>
-          </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {[
-              {
-                icon: Briefcase,
-                title: "Corporate Uniforms",
-                tag: "For HR & Admin Teams",
-                desc: "Complete identity wear programs including shirts, trousers, blazers, and sarees designed for brand consistency.",
-                stats: ["Wrinkle-Free Fabrics", "Logo Embroidery", "Multi-Size Kits"],
-                metrics: { value: "2.1M", label: "Corporate units delivered" },
-                action: "View Corporate Portfolio",
-                color: "from-primary/5 to-primary/10",
-                border: "border-primary/20"
-              },
-              {
-                icon: ShoppingBag,
-                title: "Promotional & Event Wear",
-                tag: "For Marketing Teams",
-                desc: "High-impact T-shirts, caps, and jackets for brand campaigns, product launches, and corporate events.",
-                stats: ["24h Rush Orders", "HD Screen Printing", "Sustainable Options"],
-                metrics: { value: "680K", label: "Event pieces annually" },
-                action: "View Event Concepts",
-                color: "from-accent/5 to-accent/10",
-                border: "border-accent/20"
-              },
-              {
-                icon: Shield,
-                title: "Industrial Workwear",
-                tag: "For Operations & Safety",
-                desc: "Heavy-duty uniforms, safety vests, and specialized apparel for manufacturing, logistics, and site teams.",
-                stats: ["Reinforced Stitching", "FR/High-Vis Options", "Industrial Laundry"],
-                metrics: { value: "98.7%", label: "Durability rating" },
-                action: "View Safety Gear",
-                color: "from-neutral-50 to-white",
-                border: "border-neutral-200/50"
-              }
-            ].map((sol, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="group relative h-full"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${sol.color} rounded-2xl border ${sol.border} transform transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl`}></div>
-
-                <div className="relative p-8 h-full flex flex-col z-10">
-                  <div className="flex justify-between items-start mb-6">
-                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${sol.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
-                      <sol.icon className="w-7 h-7 text-primary group-hover:text-primary/80" />
-                    </div>
-                    <span className="text-xs font-bold px-3 py-1 bg-white/80 backdrop-blur-sm text-neutral-600 rounded-full border border-neutral-200/50">
-                      {sol.tag}
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl font-bold text-neutral-900 mb-3" style={{ fontFamily: BRAND.fonts.heading }}>
-                    {sol.title}
-                  </h3>
-                  <p className="text-neutral-600 mb-6 flex-grow">{sol.desc}</p>
-
-                  {/* Metrics */}
-                  <div className="mb-6 p-4 bg-white/50 backdrop-blur-sm rounded-lg border border-neutral-200/30">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <div className="text-2xl font-bold text-primary" style={{ fontFamily: BRAND.fonts.heading }}>{sol.metrics.value}</div>
-                        <div className="text-xs text-neutral-500">{sol.metrics.label}</div>
-                      </div>
-                      <TrendingUp className="w-6 h-6 text-accent" />
-                    </div>
-                  </div>
-
-                  {/* Features */}
-                  <div className="space-y-3 mb-8">
-                    {sol.stats.map((stat, i) => (
-                      <div key={i} className="flex items-center text-sm text-neutral-600">
-                        <div className="w-2 h-2 bg-accent rounded-full mr-3"></div>
-                        {stat}
-                      </div>
-                    ))}
-                  </div>
-
-                  <button
-                    className="flex items-center text-primary font-semibold text-sm tracking-wide group/btn mt-auto"
-                    onClick={() => scrollToSection('gallery')}
-                  >
-                    {sol.action}
-                    <ArrowRight className="w-4 h-4 ml-2 transform transition-transform group-hover/btn:translate-x-2" />
-                  </button>
-                </div>
-              </motion.div>
-            ))}
           </div>
         </div>
       </section>
@@ -910,6 +795,121 @@ export default function Home() {
               </p>
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Solutions Section - Rich Tiles */}
+      <section id="solutions" className="py-24 bg-gradient-to-b from-neutral-50/50 to-white">
+        <div className="container mx-auto px-4">
+          <motion.div
+            className="text-center max-w-3xl mx-auto mb-16"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <Badge className="mb-4 bg-white text-neutral-800 border-neutral-200/50 shadow-sm">Specialized Solutions</Badge>
+            <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+              Industry-Specific Apparel Programs
+            </h2>
+            <p className="text-lg text-neutral-600">
+              Tailored manufacturing lines designed for specific corporate needs and procurement workflows.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {[
+              {
+                icon: Briefcase,
+                title: "Corporate Uniforms",
+                tag: "For HR & Admin Teams",
+                desc: "Complete identity wear programs including shirts, trousers, blazers, and sarees designed for brand consistency.",
+                stats: ["Wrinkle-Free Fabrics", "Logo Embroidery", "Multi-Size Kits"],
+                metrics: { value: "2.1M", label: "Corporate units delivered" },
+                action: "View Corporate Portfolio",
+                color: "from-primary/5 to-primary/10",
+                border: "border-primary/20"
+              },
+              {
+                icon: ShoppingBag,
+                title: "Promotional & Event Wear",
+                tag: "For Marketing Teams",
+                desc: "High-impact T-shirts, caps, and jackets for brand campaigns, product launches, and corporate events.",
+                stats: ["24h Rush Orders", "HD Screen Printing", "Sustainable Options"],
+                metrics: { value: "680K", label: "Event pieces annually" },
+                action: "View Event Concepts",
+                color: "from-accent/5 to-accent/10",
+                border: "border-accent/20"
+              },
+              {
+                icon: Shield,
+                title: "Industrial Workwear",
+                tag: "For Operations & Safety",
+                desc: "Heavy-duty uniforms, safety vests, and specialized apparel for manufacturing, logistics, and site teams.",
+                stats: ["Reinforced Stitching", "FR/High-Vis Options", "Industrial Laundry"],
+                metrics: { value: "98.7%", label: "Durability rating" },
+                action: "View Safety Gear",
+                color: "from-neutral-50 to-white",
+                border: "border-neutral-200/50"
+              }
+            ].map((sol, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative h-full"
+              >
+                <div className={`absolute inset-0 bg-gradient-to-br ${sol.color} rounded-2xl border ${sol.border} transform transition-all duration-500 group-hover:scale-[1.02] group-hover:shadow-2xl`}></div>
+
+                <div className="relative p-8 h-full flex flex-col z-10">
+                  <div className="flex justify-between items-start mb-6">
+                    <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${sol.color} flex items-center justify-center group-hover:scale-110 transition-transform`}>
+                      <sol.icon className="w-7 h-7 text-primary group-hover:text-primary/80" />
+                    </div>
+                    <span className="text-xs font-bold px-3 py-1 bg-white/80 backdrop-blur-sm text-neutral-600 rounded-full border border-neutral-200/50">
+                      {sol.tag}
+                    </span>
+                  </div>
+
+                  <h3 className="text-2xl font-bold text-neutral-900 mb-3" style={{ fontFamily: BRAND.fonts.heading }}>
+                    {sol.title}
+                  </h3>
+                  <p className="text-neutral-600 mb-6 flex-grow">{sol.desc}</p>
+
+                  {/* Metrics */}
+                  <div className="mb-6 p-4 bg-white/50 backdrop-blur-sm rounded-lg border border-neutral-200/30">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="text-2xl font-bold text-primary" style={{ fontFamily: BRAND.fonts.heading }}>{sol.metrics.value}</div>
+                        <div className="text-xs text-neutral-500">{sol.metrics.label}</div>
+                      </div>
+                      <TrendingUp className="w-6 h-6 text-accent" />
+                    </div>
+                  </div>
+
+                  {/* Features */}
+                  <div className="space-y-3 mb-8">
+                    {sol.stats.map((stat, i) => (
+                      <div key={i} className="flex items-center text-sm text-neutral-600">
+                        <div className="w-2 h-2 bg-accent rounded-full mr-3"></div>
+                        {stat}
+                      </div>
+                    ))}
+                  </div>
+
+                  <button
+                    className="flex items-center text-primary font-semibold text-sm tracking-wide group/btn mt-auto"
+                    onClick={() => scrollToSection('gallery')}
+                  >
+                    {sol.action}
+                    <ArrowRight className="w-4 h-4 ml-2 transform transition-transform group-hover/btn:translate-x-2" />
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -1372,7 +1372,7 @@ export default function Home() {
 
                 <div>
                   <span className="font-bold text-xl block" style={{ fontFamily: BRAND.fonts.heading }}>Rekha Garments</span>
-                  <span className="text-xs text-neutral-400">Manufacturing Excellence Since 1995</span>
+                  <span className="text-xs text-neutral-400">Manufacturing Excellence Since 2004</span>
                 </div>
               </div>
               <p className="text-neutral-400 text-sm leading-relaxed">
