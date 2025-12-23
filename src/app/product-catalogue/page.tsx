@@ -265,89 +265,7 @@ export default function ProductCatalogPage() {
 
     return (
         <div className="min-h-screen bg-white text-gray-900 selection:bg-primary/20 selection:text-primary overflow-x-hidden" style={{ fontFamily: BRAND.fonts.body }}>
-            {/* Navigation Header */}
-            <motion.header
-                className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-                    ? 'bg-white/95 backdrop-blur-lg shadow-lg py-3 border-b border-neutral-200/30'
-                    : 'bg-gradient-to-b from-white/90 via-white/80 to-transparent py-5 border-b border-transparent'
-                    }`}
-                initial={{ y: -100 }}
-                animate={{ y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-            >
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5 opacity-30"></div>
-                <nav className="container mx-auto px-4 relative">
-                    <div className="flex justify-between items-center">
-                        <motion.div
-                            className="flex items-center space-x-3 group cursor-pointer"
-                            whileHover={{ scale: 1.02 }}
-                            onClick={() => window.location.href = '/'}
-                        >
-                            <div className="w-12 h-12 flex items-center justify-center overflow-hidden">
-                                <img
-                                    src="/rekha_logo.jpg"
-                                    alt="Rekha Logo"
-                                    className="w-8 h-8 object-contain"
-                                />
-                            </div>
-                            <div>
-                                <span className="font-bold text-xl leading-tight block text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>Rekha Garments</span>
-                                <span className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium block border-l-2 border-accent pl-2">Complete Product Catalog</span>
-                            </div>
-                        </motion.div>
 
-                        <div className="hidden lg:flex items-center space-x-8">
-                            {['Home', 'About', 'Leadership', 'Solutions', 'Process', 'Product Catalog', 'Contact'].map((item) => {
-                                const handleNavigation = () => {
-                                    if (item === 'Home') {
-                                        window.location.href = '/';
-                                    } else if (item === 'Product Catalog') {
-                                        scrollToTop();
-                                    } else if (item === 'Seasonal Collections') {
-                                        window.location.href = '/festive-clothing';
-                                    } else if (['About', 'Leadership', 'Solutions', 'Process', 'Contact'].includes(item)) {
-                                        window.location.href = `/#${item.toLowerCase().replace(' ', '-')}`;
-                                    }
-                                };
-
-                                return (
-                                    <motion.button
-                                        key={item}
-                                        className="text-sm font-medium text-neutral-700 hover:text-primary transition-colors relative group py-2"
-                                        onClick={handleNavigation}
-                                    >
-                                        <span className="relative z-10">{item}</span>
-                                        <span className={`absolute inset-x-0 -bottom-0.5 h-0.5 bg-gradient-to-r from-primary to-accent transform ${item === 'Product Catalog' ? 'scale-x-100' : 'scale-x-0'} group-hover:scale-x-100 transition-transform duration-300 origin-left`}></span>
-                                    </motion.button>
-                                );
-                            })}
-                        </div>
-
-                        <div className="flex items-center space-x-3">
-                            <Button
-                                variant="ghost"
-                                size="sm"
-                                className="hidden md:flex text-neutral-600 hover:text-primary hover:bg-primary/5 border border-neutral-200/50"
-                                onClick={() => window.open(whatsappUrl, '_blank')}
-                            >
-                                <Phone className="w-4 h-4 mr-2" />
-                                <span className="font-medium">+91 79424 52200</span>
-                            </Button>
-                            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                <Button
-                                    size="sm"
-                                    className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary hover:to-primary text-white shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all"
-                                    onClick={scrollToHomeContact}
-                                    style={{ fontFamily: BRAND.fonts.heading }}
-                                >
-                                    <ShoppingBag className="w-4 h-4 mr-2" />
-                                    <span>Get Quote</span>
-                                </Button>
-                            </motion.div>
-                        </div>
-                    </div>
-                </nav>
-            </motion.header>
 
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary/5 pt-20">
@@ -475,8 +393,8 @@ export default function ProductCatalogPage() {
 
                     {/* Category Tabs */}
                     <Tabs defaultValue="all" className="max-w-7xl mx-auto" onValueChange={setActiveTab}>
-                        <div className="flex justify-center mb-12">
-                            <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 bg-neutral-100/50 p-1 rounded-xl">
+                        <div className="flex justify-center mb-16">
+                            <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 bg-neutral-100/50 p-1 rounded-xl h-auto w-full">
                                 <TabsTrigger value="all" className="data-[state=active]:bg-white">
                                     <ShoppingBag className="w-4 h-4 mr-2" />
                                     All Products
