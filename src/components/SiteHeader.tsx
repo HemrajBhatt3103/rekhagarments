@@ -129,7 +129,7 @@ export function SiteHeader() {
                             </span>
                             <span className="text-[10px] uppercase tracking-wider text-neutral-500 font-medium pl-0.5 mt-0.5 flex items-center gap-1.5">
                                 <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-                                Est. 1995
+                                Est. 2004
                             </span>
                         </div>
                     </motion.div>

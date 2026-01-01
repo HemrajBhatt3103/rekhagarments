@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 
 // Dynamically import CountUp to avoid SSR issues
@@ -20,7 +21,7 @@ import {
     Building, Users as UsersIcon, Ruler, Heart, Sparkles, Gift,
     GraduationCap, School, Target as TargetIcon, Calendar,
     ShoppingBag as ShoppingBagIcon, Star as StarIcon, FileText,
-    Zap, CheckCircle, Heart as HeartIcon, Compass
+    Zap, CheckCircle, Heart as HeartIcon, Compass, Image as ImageIcon
 } from 'lucide-react';
 
 // ============================================
@@ -52,19 +53,34 @@ const BRAND = {
 export default function ProductCatalogPage() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeTab, setActiveTab] = useState('all');
+    const [activeGalleryFilter, setActiveGalleryFilter] = useState('All');
     const statsRef = useRef(null);
     const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" });
 
     const whatsappMessage = "Hello! I'm interested in your product catalog and would like to request a quote."
     const whatsappUrl = `https://wa.me/918238636766?text=${encodeURIComponent(whatsappMessage)}`
 
+    const searchParams = useSearchParams();
+
     useEffect(() => {
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
         };
         window.addEventListener('scroll', handleScroll);
+
+        // Check for tab param
+        const tabParam = searchParams.get('tab');
+        if (tabParam) {
+            setActiveTab(tabParam);
+            // Scroll to catalog section if needed, or just let page load
+            const catalogSection = document.getElementById('catalog-section');
+            if (catalogSection) {
+                catalogSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
         return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    }, [searchParams]);
 
     const scrollToHomeContact = () => {
         window.location.href = '/#contact';
@@ -263,6 +279,29 @@ export default function ProductCatalogPage() {
         { name: 'Heat Transfer', bestFor: 'Small batches, quick turnaround' }
     ];
 
+    // Gallery Images
+    const galleryImages = [
+        { src: '/black_track.jpeg', category: 'Tracks', name: 'Black Track' },
+        { src: '/blue_track.jpeg', category: 'Tracks', name: 'Blue Track' },
+        { src: '/blue.jpeg', category: 'School Uniform', name: 'Blue Uniform' },
+        { src: '/dark_blue.jpeg', category: 'School Uniform', name: 'Dark Blue Uniform' },
+        { src: '/light_red.jpeg', category: 'School Uniform', name: 'Light Red Uniform' },
+        { src: '/mix.jpeg', category: 'School Uniform', name: 'Mix Uniform' },
+        { src: '/orange.jpeg', category: 'School Uniform', name: 'Orange Uniform' },
+        { src: '/red.jpeg', category: 'School Uniform', name: 'Red Uniform' },
+        { src: '/airforce_blue_polo.webp', category: 'Polo Tshirts', name: 'Blue Polo Tshirts' },
+        { src: '/artic_blue_polo.webp', category: 'Polo Tshirts', name: 'Artic Polo Tshirts' },
+        { src: '/basil_green_polo.webp', category: 'Polo Tshirts', name: 'Green Polo Tshirts' },
+        { src: '/black_coffee_polo.webp', category: 'Polo Tshirts', name: 'Black Coffee Polo Tshirts' },
+        { src: '/black_polo.jpeg', category: 'Polo Tshirts', name: 'Black Polo Tshirts' },
+        { src: '/deep_teal_polo.jpg', category: 'Polo Tshirts', name: 'Deep Teal Polo Tshirts' },
+
+
+
+
+
+    ];
+
     return (
         <div className="min-h-screen bg-white text-gray-900 selection:bg-primary/20 selection:text-primary overflow-x-hidden" style={{ fontFamily: BRAND.fonts.body }}>
 
@@ -374,7 +413,7 @@ export default function ProductCatalogPage() {
             </section>
 
             {/* Product Categories Tabs */}
-            <section className="py-24 bg-gradient-to-b from-white to-neutral-50/50">
+            <section id="catalog-section" className="py-24 bg-gradient-to-b from-white to-neutral-50/50">
                 <div className="container mx-auto px-4">
                     <motion.div
                         className="text-center max-w-3xl mx-auto mb-16"
@@ -392,12 +431,16 @@ export default function ProductCatalogPage() {
                     </motion.div>
 
                     {/* Category Tabs */}
-                    <Tabs defaultValue="all" className="max-w-7xl mx-auto" onValueChange={setActiveTab}>
+                    <Tabs value={activeTab} className="max-w-7xl mx-auto" onValueChange={setActiveTab}>
                         <div className="flex justify-center mb-16">
-                            <TabsList className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2 bg-neutral-100/50 p-1 rounded-xl h-auto w-full">
+                            <TabsList className="flex flex-wrap justify-center gap-2 bg-neutral-100/50 p-1 rounded-xl h-auto w-full">
                                 <TabsTrigger value="all" className="data-[state=active]:bg-white">
                                     <ShoppingBag className="w-4 h-4 mr-2" />
                                     All Products
+                                </TabsTrigger>
+                                <TabsTrigger value="gallery" className="data-[state=active]:bg-white">
+                                    <ImageIcon className="w-4 h-4 mr-2" />
+                                    Our Gallery
                                 </TabsTrigger>
                                 <TabsTrigger value="t-shirts" className="data-[state=active]:bg-white">
                                     <Shirt className="w-4 h-4 mr-2" />
@@ -486,6 +529,80 @@ export default function ProductCatalogPage() {
                             </div>
                         </TabsContent>
 
+                        {/* Our Gallery Tab */}
+                        <TabsContent value="gallery" className="mt-0">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                className="mb-10"
+                            >
+                                <div className="flex items-center gap-4 mb-8">
+                                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500/5 to-pink-600/10 flex items-center justify-center">
+                                        <ImageIcon className="w-8 h-8 text-pink-600" />
+                                    </div>
+                                    <div>
+                                        <h3 className="text-3xl font-bold text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
+                                            Our Gallery
+                                        </h3>
+                                        <p className="text-neutral-600">Explore our latest designs and collections.</p>
+                                    </div>
+                                </div>
+
+
+
+                                {/* Gallery Filter Bar */}
+                                <div className="flex justify-center mb-8">
+                                    <div className="bg-neutral-100/80 p-1 rounded-lg flex space-x-1">
+                                        {['All', 'Tracks', 'School Uniform', 'Polo Tshirts'].map((filter) => (
+                                            <button
+                                                key={filter}
+                                                onClick={() => setActiveGalleryFilter(filter)}
+                                                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeGalleryFilter === filter
+                                                    ? 'bg-white text-primary shadow-sm'
+                                                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/50'
+                                                    }`}
+                                            >
+                                                {filter}
+                                            </button>
+                                        ))}
+                                    </div>
+                                </div>
+
+                                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                    {galleryImages
+                                        .filter(img => activeGalleryFilter === 'All' || img.category === activeGalleryFilter)
+                                        .map((image, index) => (
+                                            <motion.div
+                                                key={`${image.name}-${index}`}
+                                                initial={{ opacity: 0, scale: 0.9 }}
+                                                whileInView={{ opacity: 1, scale: 1 }}
+                                                viewport={{ once: true }}
+                                                transition={{ delay: index * 0.05 }}
+                                            >
+                                                <Card className="h-full hover:shadow-xl transition-all duration-300 border border-neutral-200/50 overflow-hidden group">
+                                                    <div className="relative aspect-[4/5] overflow-hidden">
+                                                        <img
+                                                            src={image.src}
+                                                            alt={image.name}
+                                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                        />
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                                                            <Badge className="bg-white/90 text-neutral-900 backdrop-blur-sm">
+                                                                {image.category}
+                                                            </Badge>
+                                                        </div>
+                                                    </div>
+                                                    <CardContent className="p-4">
+                                                        <h3 className="font-bold text-neutral-900">{image.name}</h3>
+                                                        <p className="text-sm text-neutral-500">{image.category}</p>
+                                                    </CardContent>
+                                                </Card>
+                                            </motion.div>
+                                        ))}
+                                </div>
+                            </motion.div>
+                        </TabsContent>
+
                         {/* Category-specific Tabs */}
                         {productCategories.map((category) => (
                             <TabsContent key={category.id} value={category.id} className="mt-0">
@@ -572,10 +689,10 @@ export default function ProductCatalogPage() {
                         ))}
                     </Tabs>
                 </div>
-            </section>
+            </section >
 
             {/* Fabric & Printing Options */}
-            <section className="py-24 bg-white">
+            < section className="py-24 bg-white" >
                 <div className="container mx-auto px-4">
                     <div className="grid lg:grid-cols-2 gap-12">
                         {/* Fabric Options */}
@@ -637,10 +754,10 @@ export default function ProductCatalogPage() {
                         </motion.div>
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* Bulk Order Process */}
-            <section className="py-24 bg-gradient-to-b from-neutral-50/50 to-white">
+            < section className="py-24 bg-gradient-to-b from-neutral-50/50 to-white" >
                 <div className="container mx-auto px-4">
                     <motion.div
                         className="text-center max-w-3xl mx-auto mb-16"
@@ -701,10 +818,10 @@ export default function ProductCatalogPage() {
                         ))}
                     </div>
                 </div>
-            </section>
+            </section >
 
             {/* CTA Section */}
-            <section className="py-24 bg-gradient-to-r from-primary to-primary/90 text-white">
+            < section className="py-24 bg-gradient-to-r from-primary to-primary/90 text-white" >
                 <div className="container mx-auto px-4 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -739,10 +856,10 @@ export default function ProductCatalogPage() {
                         </div>
                     </motion.div>
                 </div>
-            </section>
+            </section >
 
             {/* Footer */}
-            <footer className="bg-gradient-to-b from-neutral-800 to-neutral-900 text-white py-16">
+            < footer className="bg-gradient-to-b from-neutral-800 to-neutral-900 text-white py-16" >
                 <div className="container mx-auto px-4">
                     <div className="grid md:grid-cols-3 gap-12 mb-12">
                         <div>
@@ -808,7 +925,7 @@ export default function ProductCatalogPage() {
                         </p>
                     </div>
                 </div>
-            </footer>
-        </div>
+            </footer >
+        </div >
     );
 }
