@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { motion, useInView } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
@@ -50,7 +50,7 @@ const BRAND = {
     }
 };
 
-export default function ProductCatalogPage() {
+function ProductCatalogContent() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeTab, setActiveTab] = useState('all');
     const [activeGalleryFilter, setActiveGalleryFilter] = useState('All');
@@ -295,17 +295,23 @@ export default function ProductCatalogPage() {
         { src: '/black_coffee_polo.webp', category: 'Polo Tshirts', name: 'Black Coffee Polo Tshirts' },
         { src: '/black_polo.jpeg', category: 'Polo Tshirts', name: 'Black Polo Tshirts' },
         { src: '/deep_teal_polo.jpg', category: 'Polo Tshirts', name: 'Deep Teal Polo Tshirts' },
-
-
-
-
-
+        { src: '/divine_maroon.webp', category: 'Polo Tshirts', name: 'Divine Maroon Polo Tshirts' },
+        { src: '/exotic_olive_polo.webp', category: 'Polo Tshirts', name: 'Exotic Olive Polo Tshirts' },
+        { src: '/gunmetal_grey_polo.webp', category: 'Polo Tshirts', name: 'Gunmetal Grey Polo Tshirts' },
+        { src: '/midnight_navy_polo.webp', category: 'Polo Tshirts', name: 'Midnight Navy Polo Tshirts' },
+        { src: '/mulberry_wine_polo.webp', category: 'Polo Tshirts', name: 'Mulberry Wine Polo Tshirts' },
+        { src: '/natural_rust_polo.webp', category: 'Polo Tshirts', name: 'Natural Rust Polo Tshirts' },
+        { src: '/peach_fuzz_polo.webp', category: 'Polo Tshirts', name: 'Peach Fuzz Polo Tshirts' },
+        { src: '/pink.webp', category: 'Polo Tshirts', name: 'Pink Polo Tshirts' },
+        { src: '/pistachio_polo.webp', category: 'Polo Tshirts', name: 'Pistachio Polo Tshirts' },
+        { src: '/sand_beige_polo.webp', category: 'Polo Tshirts', name: 'Sand Beige Polo Tshirts' },
+        { src: '/sunset_tello_polo.webp', category: 'Polo Tshirts', name: 'Sunset Tello Polo Tshirts' },
+        { src: '/thunder_grey_polo.jpg', category: 'Polo Tshirts', name: 'Thunder Grey Polo Tshirts' },
+        { src: '/white_polo.webp', category: 'Polo Tshirts', name: 'White Polo Tshirts' },
     ];
 
     return (
         <div className="min-h-screen bg-white text-gray-900 selection:bg-primary/20 selection:text-primary overflow-x-hidden" style={{ fontFamily: BRAND.fonts.body }}>
-
-
             {/* Hero Section */}
             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary/5 pt-20">
                 <div className="absolute inset-0">
@@ -548,8 +554,6 @@ export default function ProductCatalogPage() {
                                     </div>
                                 </div>
 
-
-
                                 {/* Gallery Filter Bar */}
                                 <div className="flex justify-center mb-8">
                                     <div className="bg-neutral-100/80 p-1 rounded-lg flex space-x-1">
@@ -689,10 +693,10 @@ export default function ProductCatalogPage() {
                         ))}
                     </Tabs>
                 </div>
-            </section >
+            </section>
 
             {/* Fabric & Printing Options */}
-            < section className="py-24 bg-white" >
+            <section className="py-24 bg-white">
                 <div className="container mx-auto px-4">
                     <div className="grid lg:grid-cols-2 gap-12">
                         {/* Fabric Options */}
@@ -754,10 +758,10 @@ export default function ProductCatalogPage() {
                         </motion.div>
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* Bulk Order Process */}
-            < section className="py-24 bg-gradient-to-b from-neutral-50/50 to-white" >
+            <section className="py-24 bg-gradient-to-b from-neutral-50/50 to-white">
                 <div className="container mx-auto px-4">
                     <motion.div
                         className="text-center max-w-3xl mx-auto mb-16"
@@ -818,10 +822,10 @@ export default function ProductCatalogPage() {
                         ))}
                     </div>
                 </div>
-            </section >
+            </section>
 
             {/* CTA Section */}
-            < section className="py-24 bg-gradient-to-r from-primary to-primary/90 text-white" >
+            <section className="py-24 bg-gradient-to-r from-primary to-primary/90 text-white">
                 <div className="container mx-auto px-4 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
@@ -856,10 +860,10 @@ export default function ProductCatalogPage() {
                         </div>
                     </motion.div>
                 </div>
-            </section >
+            </section>
 
             {/* Footer */}
-            < footer className="bg-gradient-to-b from-neutral-800 to-neutral-900 text-white py-16" >
+            <footer className="bg-gradient-to-b from-neutral-800 to-neutral-900 text-white py-16">
                 <div className="container mx-auto px-4">
                     <div className="grid md:grid-cols-3 gap-12 mb-12">
                         <div>
@@ -925,7 +929,22 @@ export default function ProductCatalogPage() {
                         </p>
                     </div>
                 </div>
-            </footer >
-        </div >
+            </footer>
+        </div>
+    );
+}
+
+export default function ProductCatalogPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-white">
+                <div className="text-center">
+                    <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
+                    <p className="text-neutral-600">Loading catalog...</p>
+                </div>
+            </div>
+        }>
+            <ProductCatalogContent />
+        </Suspense>
     );
 }
