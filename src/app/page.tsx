@@ -166,8 +166,24 @@ export default function Home() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted');
+    const text = `*New Website Enquiry*\n\n*Name:* ${contactForm.name}\n*Company:* ${contactForm.company}\n*Email:* ${contactForm.email}\n*Phone:* ${contactForm.phone}\n*Requirement:* ${contactForm.requirement}\n*Quantity:* ${contactForm.quantity} ${contactForm.qtyUnit}\n*Details:* ${contactForm.details}`;
+    const url = `https://wa.me/918238636766?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  };
+
+  const [contactForm, setContactForm] = useState({
+    name: '',
+    company: '',
+    email: '',
+    phone: '',
+    requirement: '',
+    quantity: '',
+    qtyUnit: 'units',
+    details: ''
+  });
+
+  const handleContactChange = (field: string, value: string) => {
+    setContactForm(prev => ({ ...prev, [field]: value }));
   };
 
   // Stagger animation for hero text - Fixed types
@@ -1410,6 +1426,8 @@ export default function Home() {
                         placeholder="Your full name"
                         required
                         className="border-neutral-300/50 focus:border-primary"
+                        value={contactForm.name}
+                        onChange={(e) => handleContactChange('name', e.target.value)}
                       />
                     </div>
                     <div>
@@ -1418,6 +1436,8 @@ export default function Home() {
                         placeholder="Organization"
                         required
                         className="border-neutral-300/50 focus:border-primary"
+                        value={contactForm.company}
+                        onChange={(e) => handleContactChange('company', e.target.value)}
                       />
                     </div>
                   </div>
@@ -1430,6 +1450,8 @@ export default function Home() {
                         placeholder="corporate@email.com"
                         required
                         className="border-neutral-300/50 focus:border-primary"
+                        value={contactForm.email}
+                        onChange={(e) => handleContactChange('email', e.target.value)}
                       />
                     </div>
                     <div>
@@ -1438,13 +1460,15 @@ export default function Home() {
                         placeholder="+91 98765 43210"
                         required
                         className="border-neutral-300/50 focus:border-primary"
+                        value={contactForm.phone}
+                        onChange={(e) => handleContactChange('phone', e.target.value)}
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-neutral-700 mb-2">Requirement Type *</label>
-                    <Select required>
+                    <Select required onValueChange={(val) => handleContactChange('requirement', val)} value={contactForm.requirement}>
                       <SelectTrigger className="border-neutral-300/50 focus:border-primary">
                         <SelectValue placeholder="Select apparel program" />
                       </SelectTrigger>
@@ -1460,8 +1484,13 @@ export default function Home() {
                   <div>
                     <label className="block text-sm font-medium text-neutral-700 mb-2">Approximate Quantity</label>
                     <div className="flex space-x-2">
-                      <Input placeholder="e.g., 500" className="border-neutral-300/50 focus:border-primary" />
-                      <Select>
+                      <Input
+                        placeholder="e.g., 500"
+                        className="border-neutral-300/50 focus:border-primary"
+                        value={contactForm.quantity}
+                        onChange={(e) => handleContactChange('quantity', e.target.value)}
+                      />
+                      <Select onValueChange={(val) => handleContactChange('qtyUnit', val)} value={contactForm.qtyUnit}>
                         <SelectTrigger className="border-neutral-300/50 focus:border-primary w-32">
                           <SelectValue placeholder="Units" />
                         </SelectTrigger>
@@ -1480,6 +1509,8 @@ export default function Home() {
                       placeholder="Tell us about your project timeline, branding needs, fabric preferences..."
                       rows={4}
                       className="border-neutral-300/50 focus:border-primary"
+                      value={contactForm.details}
+                      onChange={(e) => handleContactChange('details', e.target.value)}
                     />
                   </div>
 
