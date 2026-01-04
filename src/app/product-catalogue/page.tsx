@@ -308,6 +308,7 @@ function ProductCatalogContent() {
         { src: '/sunset_tello_polo.webp', category: 'Polo Tshirts', name: 'Sunset Tello Polo Tshirts' },
         { src: '/thunder_grey_polo.jpg', category: 'Polo Tshirts', name: 'Thunder Grey Polo Tshirts' },
         { src: '/white_polo.webp', category: 'Polo Tshirts', name: 'White Polo Tshirts' },
+        { src: '/white_round_neck.webp', category: 'Round Neck Tshirts', name: 'White Round Neck Tshirts' },
     ];
 
     return (
@@ -557,7 +558,7 @@ function ProductCatalogContent() {
                                 {/* Gallery Filter Bar */}
                                 <div className="flex justify-center mb-8">
                                     <div className="bg-neutral-100/80 p-1 rounded-lg flex space-x-1">
-                                        {['All', 'Tracks', 'School Uniform', 'Polo Tshirts'].map((filter) => (
+                                        {['All', 'Tracks', 'School Uniform', 'Polo Tshirts', 'Round Neck Tshirts'].map((filter) => (
                                             <button
                                                 key={filter}
                                                 onClick={() => setActiveGalleryFilter(filter)}
