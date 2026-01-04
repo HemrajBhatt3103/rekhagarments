@@ -226,7 +226,7 @@ export default function FestiveClothingPage() {
                                 variant="ghost"
                                 size="sm"
                                 className="hidden md:flex text-neutral-600 hover:text-primary hover:bg-primary/5 border border-neutral-200/50"
-                                onClick={() => window.open(whatsappUrl, '_blank')}
+                                onClick={() => window.location.href = 'tel:+917942452200'}
                             >
                                 <Phone className="w-4 h-4 mr-2" />
                                 <span className="font-medium">+91 79424 52200</span>

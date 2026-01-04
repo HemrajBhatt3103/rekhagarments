@@ -174,13 +174,22 @@ export function SiteHeader() {
                 {/* Right Actions */}
                 <div className="flex items-center gap-3 relative z-10">
                     <Button
-                        variant="default" // Ghost is too plain, let's try a subtle outline or secondary
+                        variant="default"
                         size="sm"
                         className="hidden md:flex bg-white/50 text-neutral-700 hover:text-primary hover:bg-white border border-neutral-200/60 shadow-sm backdrop-blur-sm transition-all"
-                        onClick={() => window.open(whatsappUrl, '_blank')}
+                        onClick={() => window.location.href = 'tel:+919479788000'}
                     >
                         <Phone className="w-3.5 h-3.5 mr-2" />
-                        <span>+91 94797 88000 / 94263 23279</span>
+                        <span>+91 94797 88000</span>
+                    </Button>
+                    <Button
+                        variant="default"
+                        size="sm"
+                        className="hidden md:flex bg-white/50 text-neutral-700 hover:text-primary hover:bg-white border border-neutral-200/60 shadow-sm backdrop-blur-sm transition-all"
+                        onClick={() => window.location.href = 'tel:+919426323279'}
+                    >
+                        <Phone className="w-3.5 h-3.5 mr-2" />
+                        <span>+91 94263 23279</span>
                     </Button>
 
                     <motion.div
@@ -263,11 +272,19 @@ export function SiteHeader() {
                                     </Button>
                                     <Button
                                         variant="outline"
-                                        className="w-full border-neutral-200"
-                                        onClick={() => window.open(whatsappUrl, '_blank')}
+                                        className="w-full border-neutral-200 mb-3"
+                                        onClick={() => window.location.href = 'tel:+919479788000'}
                                     >
                                         <Phone className="w-4 h-4 mr-2" />
-                                        WhatsApp Us
+                                        Call +91 94797 88000
+                                    </Button>
+                                    <Button
+                                        variant="outline"
+                                        className="w-full border-neutral-200"
+                                        onClick={() => window.location.href = 'tel:+919426323279'}
+                                    >
+                                        <Phone className="w-4 h-4 mr-2" />
+                                        Call +91 94263 23279
                                     </Button>
                                 </div>
                             </SheetContent>
@@ -275,6 +292,6 @@ export function SiteHeader() {
                     </div>
                 </div>
             </nav>
-        </motion.header>
+        </motion.header >
     );
 }

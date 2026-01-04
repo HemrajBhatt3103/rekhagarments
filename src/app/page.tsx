@@ -1643,6 +1643,8 @@ export default function Home() {
                     <div>
                       <div className="font-semibold text-neutral-900">Email</div>
                       <div className="space-y-1">
+                        <div className="text-neutral-600">contact@rekhagarments.com</div>
+                        <div className="text-neutral-600">support@rekhagarments.com</div>
                         <div className="text-neutral-600">rekhagarments2007@yahoo.co.in</div>
                       </div>
                       <div className="text-sm text-neutral-500 mt-1">Response within 24 hours</div>
@@ -1656,12 +1658,10 @@ export default function Home() {
                     <div>
                       <div className="font-semibold text-neutral-900">Factory & Office</div>
                       <div className="text-neutral-600">
-                        Plot No. 27, GIDC Estate<br />
-                        Makarpura, Vadodara<br />
-                        Gujarat, India - 390010
+                        RG, Opposite Rajhans Buisness Hub, Raopura Road, Vadodara Gujarat 390001
                       </div>
                       <div className="text-sm text-neutral-500 mt-1">
-                        <a href="#" className="text-primary hover:underline">Get directions ↗</a>
+                        <a href="https://maps.app.goo.gl/r5U6JSRfDdcG2WZH7?g_st=ac" className="text-primary hover:underline">Get directions ↗</a>
                       </div>
                     </div>
                   </div>
