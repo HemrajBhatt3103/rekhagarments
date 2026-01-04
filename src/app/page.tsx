@@ -1769,7 +1769,7 @@ export default function Home() {
                   { icon: Instagram, label: "Instagram", color: "from-purple-600 to-pink-600", link: "https://www.instagram.com/rekha_garments___" },
                   { icon: Linkedin, label: "LinkedIn", color: "from-blue-600 to-blue-700", link: "https://www.linkedin.com/company/rekha-garments-manufacturer-wholesaler/" },
                   { icon: Facebook, label: "Facebook", color: "from-blue-500 to-blue-600", link: "https://www.facebook.com/share/17fuRHa4b6/" },
-                  { icon: location, label: "Google Maps", color: "from-blue-500 to-blue-600", link: "https://maps.app.goo.gl/r5U6JSRfDdcG2WZH7?g_st=ac" }
+                  { icon: MapPin, label: "Google Maps", color: "from-blue-500 to-blue-600", link: "https://maps.app.goo.gl/r5U6JSRfDdcG2WZH7?g_st=ac" }
                 ].map((social, index) => (
                   <motion.button
                     key={index}
