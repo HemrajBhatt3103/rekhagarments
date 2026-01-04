@@ -144,6 +144,21 @@ export default function Home() {
     qtyUnit: 'units',
     details: ''
   });
+  const [activeProcessStep, setActiveProcessStep] = useState(0);
+
+  useEffect(() => {
+    // Animation loop for process steps
+    const timer = setTimeout(() => {
+      setActiveProcessStep((prev) => {
+        if (prev === 5) {
+          return 0; // Reset after last step
+        }
+        return prev + 1;
+      });
+    }, activeProcessStep === 5 ? 2000 : 1000); // 2s pause on last step, 1s for others
+
+    return () => clearTimeout(timer);
+  }, [activeProcessStep]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -590,16 +605,58 @@ export default function Home() {
                 <h3 className="text-xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>Our Production Flow</h3>
                 <div className="relative">
                   <div className="flex items-center justify-between mb-8">
-                    {['Fabric', 'Cutting', 'Stitching', 'Printing', 'QC', 'Pack'].map((step, i) => (
-                      <div key={i} className="flex flex-col items-center">
-                        <div className="w-10 h-10 rounded-full bg-white border-2 border-primary/20 flex items-center justify-center mb-2">
-                          <span className="text-sm font-bold text-primary">{i + 1}</span>
-                        </div>
-                        <span className="text-xs font-medium text-neutral-600">{step}</span>
-                      </div>
-                    ))}
+                    {
+                      [
+                        { name: 'Fabric', icon: '/icons/fabric.png' },
+                        { name: 'Cutting', icon: '/icons/cutting.png' },
+                        { name: 'Stitching', icon: '/icons/stitching.png' },
+                        { name: 'Printing', icon: '/icons/printing.jpg' },
+                        { name: 'QC', icon: '/icons/quality.png' },
+                        { name: 'Pack', icon: '/icons/pack.png' }
+                      ].map((step, i) => {
+                        const isActive = i === activeProcessStep;
+                        return (
+                          <div key={i} className="flex flex-col items-center z-10 relative">
+                            <div
+                              className={`
+                                w-14 h-14 rounded-full flex items-center justify-center mb-3 overflow-hidden p-2.5 transition-all duration-500
+                                ${isActive
+                                  ? 'bg-white border-2 border-primary shadow-[0_0_15px_rgba(26,54,93,0.3)] scale-110'
+                                  : 'bg-neutral-50 border border-neutral-200 grayscale opacity-70 scale-100'}
+                              `}
+                            >
+                              <img
+                                src={step.icon}
+                                alt={step.name}
+                                className="w-full h-full object-contain"
+                              />
+                            </div>
+                            <span
+                              className={`
+                                text-xs font-bold transition-colors duration-300
+                                ${isActive ? 'text-primary' : 'text-neutral-400'}
+                              `}
+                            >
+                              {step.name}
+                            </span>
+
+                            {/* Connecting Line Segment - logic to color it based on progress */}
+                            {i < 5 && (
+                              <div className="absolute top-7 left-1/2 w-[calc(100%_+_2rem)] h-0.5 -z-10">
+                                <div className="w-full h-full bg-neutral-200"></div>
+                                <div
+                                  className="absolute top-0 left-0 h-full bg-primary transition-all duration-1000 ease-linear"
+                                  style={{
+                                    width: activeProcessStep > i ? '100%' : '0%'
+                                  }}
+                                ></div>
+                              </div>
+                            )}
+                          </div>
+                        );
+                      })}
                   </div>
-                  <div className="absolute top-5 left-5 right-5 h-0.5 bg-gradient-to-r from-primary/20 via-primary/40 to-primary/20 -z-10"></div>
+
                 </div>
                 <p className="text-sm text-neutral-500 mt-6">
                   Each stage monitored by quality controllers with 32-point inspection checklist
@@ -660,7 +717,7 @@ export default function Home() {
               { name: 'Navarachna International', image: '/our_clients/navarachna_international.jpeg' },
               { name: 'Parul University', image: '/our_clients/parul_university.jpg' },
               { name: 'Siemens', image: '/our_clients/siemens.jpg' },
-              { name: 'Surat Marathon', image: '/our_clients/surat_marathon.jpg' },
+              { name: 'MSU', image: '/our_clients/msu.jpg' },
               { name: 'Vadodara Marathon', image: '/our_clients/vadodara_marathon.jpg' },
               { name: 'IOC', image: '/our_clients/IOC.NS_BIG.png' },
               { name: 'Reliance', image: '/our_clients/RELIANCE.NS_BIG.png' },
