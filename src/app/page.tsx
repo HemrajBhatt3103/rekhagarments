@@ -117,7 +117,7 @@ export default function Home() {
 
   const whatsappMessage = "Hello! I'd like to connect with you about your garment manufacturing services."
 
-  const whatsappUrl = `https://wa.me/918238636766?text=${encodeURIComponent(whatsappMessage)}`
+  const whatsappUrl = `https://wa.me/919426323279?text=${encodeURIComponent(whatsappMessage)}`
 
   useEffect(() => {
     const handleScroll = () => {

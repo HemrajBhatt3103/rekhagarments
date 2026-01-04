@@ -51,7 +51,7 @@ export default function FestiveClothingPage() {
     const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" });
 
     const whatsappMessage = "Hello! I'm interested in festive clothing for my community/event."
-    const whatsappUrl = `https://wa.me/918238636766?text=${encodeURIComponent(whatsappMessage)}`
+    const whatsappUrl = `https://wa.me/919426323279?text=${encodeURIComponent(whatsappMessage)}`
 
     useEffect(() => {
         const handleScroll = () => {

@@ -58,7 +58,7 @@ function ProductCatalogContent() {
     const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" });
 
     const whatsappMessage = "Hello! I'm interested in your product catalog and would like to request a quote."
-    const whatsappUrl = `https://wa.me/918238636766?text=${encodeURIComponent(whatsappMessage)}`
+    const whatsappUrl = `https://wa.me/919426323279?text=${encodeURIComponent(whatsappMessage)}`
 
     const searchParams = useSearchParams();
 
