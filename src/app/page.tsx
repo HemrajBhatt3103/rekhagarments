@@ -241,7 +241,7 @@ export default function Home() {
             initial="hidden"
             animate="visible"
           >
-            <motion.div variants={itemVariants} className="mb-8 mt-16">
+            <motion.div variants={itemVariants} className="mb-8">
               <Badge className="bg-white/80 backdrop-blur-sm border-neutral-200/50 text-neutral-800 hover:bg-white px-4 py-1.5 shadow-sm mb-4">
                 <Award className="w-3.5 h-3.5 fill-accent text-accent mr-2" />
                 <span className="font-medium tracking-wide">ISO 9001:2015 Certified • 28+ Years Excellence</span>
