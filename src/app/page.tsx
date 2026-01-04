@@ -212,7 +212,7 @@ export default function Home() {
 
       {/* Hero Section with Enhanced Animations */}
       <motion.section
-        className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary/5"
+        className="relative pt-32 pb-20 overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary/5"
         style={{ opacity: heroOpacity, y: heroY }}
       >
         {/* Animated Background Elements */}
@@ -234,7 +234,7 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10 pt-20">
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             className="max-w-6xl mx-auto text-center"
             variants={containerVariants}
@@ -253,7 +253,7 @@ export default function Home() {
             </motion.div>
 
             <motion.h1
-              className="mb-8 leading-[1.1] tracking-tight"
+              className="mb-6 leading-[1.1] tracking-tight"
               style={{ fontFamily: BRAND.fonts.heading }}
               variants={itemVariants}
             >
@@ -267,7 +267,7 @@ export default function Home() {
 
             {/* Updated Slogan Section */}
             <motion.div
-              className="mb-10"
+              className="mb-8"
               variants={itemVariants}
             >
               <div className="inline-flex items-center justify-center bg-accent/10 text-accent px-6 py-3 rounded-full border border-accent/20 mb-4">
@@ -286,7 +286,7 @@ export default function Home() {
             </motion.div>
 
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16"
+              className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-10"
               variants={itemVariants}
             >
               <motion.div
