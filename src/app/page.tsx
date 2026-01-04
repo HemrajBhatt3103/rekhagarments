@@ -624,6 +624,77 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Our Happy Clients Section */}
+      <section className="py-20 bg-white border-t border-neutral-200/50 overflow-hidden">
+        <div className="container mx-auto px-4 mb-12 text-center">
+          <Badge className="mb-4 bg-neutral-100 text-neutral-700 border-neutral-200/50">Trusted Partners</Badge>
+          <h2 className="text-3xl lg:text-4xl font-bold text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
+            Our Happy Clients
+          </h2>
+        </div>
+
+        <div className="relative w-full overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-r from-white to-transparent"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 bg-gradient-to-l from-white to-transparent"></div>
+
+          <motion.div
+            className="flex items-center gap-16 w-max px-4"
+            animate={{ x: "-50%" }}
+            transition={{
+              duration: 60,
+              ease: "linear",
+              repeat: Infinity,
+            }}
+          >
+            {[
+              { name: 'IOC', image: '/our_clients/IOC.NS_BIG.png' },
+              { name: 'Reliance', image: '/our_clients/RELIANCE.NS_BIG.png' },
+              { name: 'Schaeffler', image: '/our_clients/Schaeffler.png' },
+              { name: 'Adani Group', image: '/our_clients/adani_group.jpg' },
+              { name: 'Bhailal Amin Hospital', image: '/our_clients/bhailal_amin_hospital.jpg' },
+              { name: 'GE Vernora', image: '/our_clients/ge_vernora.jpg' },
+              { name: 'Ghee Gud', image: '/our_clients/ghee_gud.jpg' },
+              { name: 'Green Ply', image: '/our_clients/green_ply.jpg' },
+              { name: 'Greenathon', image: '/our_clients/greenathon.jpg' },
+              { name: 'Groww', image: '/our_clients/groww.jpg' },
+              { name: 'Navarachna International', image: '/our_clients/navarachna_international.jpeg' },
+              { name: 'Parul University', image: '/our_clients/parul_university.jpg' },
+              { name: 'Siemens', image: '/our_clients/siemens.jpg' },
+              { name: 'Surat Marathon', image: '/our_clients/surat_marathon.jpg' },
+              { name: 'Vadodara Marathon', image: '/our_clients/vadodara_marathon.jpg' },
+              { name: 'IOC', image: '/our_clients/IOC.NS_BIG.png' },
+              { name: 'Reliance', image: '/our_clients/RELIANCE.NS_BIG.png' },
+              { name: 'Schaeffler', image: '/our_clients/Schaeffler.png' },
+              { name: 'Adani Group', image: '/our_clients/adani_group.jpg' },
+              { name: 'Bhailal Amin Hospital', image: '/our_clients/bhailal_amin_hospital.jpg' },
+              { name: 'GE Vernora', image: '/our_clients/ge_vernora.jpg' },
+              { name: 'Ghee Gud', image: '/our_clients/ghee_gud.jpg' },
+              { name: 'Green Ply', image: '/our_clients/green_ply.jpg' },
+              { name: 'Greenathon', image: '/our_clients/greenathon.jpg' },
+              { name: 'Groww', image: '/our_clients/groww.jpg' },
+              { name: 'Navarachna International', image: '/our_clients/navarachna_international.jpeg' },
+              { name: 'Parul University', image: '/our_clients/parul_university.jpg' },
+              { name: 'Siemens', image: '/our_clients/siemens.jpg' },
+              { name: 'Surat Marathon', image: '/our_clients/surat_marathon.jpg' },
+              { name: 'Vadodara Marathon', image: '/our_clients/vadodara_marathon.jpg' },
+            ].map((client, index) => (
+              <div key={index} className="flex flex-col items-center justify-center flex-shrink-0 group">
+                <div className="w-40 h-24 mb-4 flex items-center justify-center transition-all duration-500 hover:scale-105">
+                  <img
+                    src={client.image}
+                    alt={client.name}
+                    className="max-w-full max-h-full object-contain"
+                  />
+                </div>
+                <span className="text-sm font-medium text-neutral-500 group-hover:text-primary transition-colors duration-300">
+                  {client.name}
+                </span>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* Leadership Team Section */}
       <section id="leadership" className="py-24 bg-gradient-to-b from-neutral-50 to-white">
         <div className="container mx-auto px-4">
@@ -1234,7 +1305,7 @@ export default function Home() {
       </section>
 
       {/* Enhanced Testimonials with Google Reviews */}
-      <section className="py-24 bg-white">
+      <section id="reviews" className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
             className="text-center max-w-3xl mx-auto mb-16"
@@ -1549,7 +1620,7 @@ export default function Home() {
                     </div>
                     <div>
                       <div className="font-semibold text-neutral-900">Phone</div>
-                      <div className="text-neutral-600">+91 79424 52200</div>
+                      <div className="text-neutral-600">+91 94797 88000 / +91 94263 23279</div>
                       <div className="text-sm text-neutral-500 mt-1">Mon-Sat, 9AM-6PM</div>
                     </div>
                   </div>
@@ -1560,7 +1631,7 @@ export default function Home() {
                     </div>
                     <div>
                       <div className="font-semibold text-neutral-900">WhatsApp Business</div>
-                      <div className="text-neutral-600">+91 79424 52200</div>
+                      <div className="text-neutral-600">+91 94797 88000 / +91 94263 23279</div>
                       <Badge className="mt-1 bg-green-500/10 text-green-700 border-green-500/20">Preferred for bulk enquiries</Badge>
                     </div>
                   </div>
@@ -1572,8 +1643,7 @@ export default function Home() {
                     <div>
                       <div className="font-semibold text-neutral-900">Email</div>
                       <div className="space-y-1">
-                        <div className="text-neutral-600">sales@rekhagarments.com</div>
-                        <div className="text-neutral-600">support@rekhagarments.com</div>
+                        <div className="text-neutral-600">rekhagarments2007@yahoo.co.in</div>
                       </div>
                       <div className="text-sm text-neutral-500 mt-1">Response within 24 hours</div>
                     </div>
@@ -1678,6 +1748,8 @@ export default function Home() {
                     onClick={() => {
                       if (item === 'Leadership Team') {
                         scrollToSection('leadership');
+                      } else if (item === 'Client Stories') {
+                        scrollToSection('reviews');
                       } else {
                         scrollToSection(item.toLowerCase().replace(' ', '-'));
                       }
@@ -1694,16 +1766,20 @@ export default function Home() {
               <h4 className="font-bold mb-6 text-lg" style={{ fontFamily: BRAND.fonts.heading }}>Connect</h4>
               <div className="flex space-x-3 mb-6">
                 {[
-                  { icon: Instagram, label: "Instagram", color: "from-purple-600 to-pink-600" },
-                  { icon: Linkedin, label: "LinkedIn", color: "from-blue-600 to-blue-700" },
-                  { icon: Facebook, label: "Facebook", color: "from-blue-500 to-blue-600" },
-                  { icon: Twitter, label: "Twitter", color: "from-sky-500 to-sky-600" }
+                  { icon: Instagram, label: "Instagram", color: "from-purple-600 to-pink-600", link: "https://www.instagram.com/rekha_garments___" },
+                  { icon: Linkedin, label: "LinkedIn", color: "from-blue-600 to-blue-700", link: "https://www.linkedin.com/company/rekha-garments-manufacturer-wholesaler/" },
+                  { icon: Facebook, label: "Facebook", color: "from-blue-500 to-blue-600", link: "https://www.facebook.com/share/17fuRHa4b6/" },
                 ].map((social, index) => (
                   <motion.button
                     key={index}
-                    className={`w-10 h-10 rounded-lg bg-gradient-to-br ${social.color} text-white flex items-center justify-center hover:shadow-lg transition-shadow`}
+                    className={`w-10 h-10 rounded-lg bg-gradient-to-br ${social.color} text-white flex items-center justify-center hover:shadow-lg transition-shadow cursor-pointer`}
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      if (social.link) {
+                        window.open(social.link, '_blank');
+                      }
+                    }}
                   >
                     <social.icon className="w-5 h-5" />
                   </motion.button>
@@ -1732,9 +1808,9 @@ export default function Home() {
                 <p className="mt-1 text-xs">Led by Rajkumar B. Lalwani with over 20 years of manufacturing expertise</p>
               </div>
               <div className="flex space-x-6 justify-end">
-                <a href="#" className="text-neutral-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
-                <a href="#" className="text-neutral-400 hover:text-white text-sm transition-colors">Terms of Service</a>
-                <a href="#" className="text-neutral-400 hover:text-white text-sm transition-colors">Quality Commitment</a>
+                <a href="/privacy-policy" className="text-neutral-400 hover:text-white text-sm transition-colors">Privacy Policy</a>
+                <a href="/terms-of-service" className="text-neutral-400 hover:text-white text-sm transition-colors">Terms of Service</a>
+                {/* <a href="/quality-commitment" className="text-neutral-400 hover:text-white text-sm transition-colors">Quality Commitment</a> */}
               </div>
             </div>
           </div>

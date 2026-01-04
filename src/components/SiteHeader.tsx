@@ -180,7 +180,7 @@ export function SiteHeader() {
                         onClick={() => window.open(whatsappUrl, '_blank')}
                     >
                         <Phone className="w-3.5 h-3.5 mr-2" />
-                        <span>+91 79424 52200</span>
+                        <span>+91 94797 88000 / 94263 23279</span>
                     </Button>
 
                     <motion.div
