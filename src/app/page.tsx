@@ -1810,6 +1810,10 @@ export default function Home() {
                         scrollToSection('leadership');
                       } else if (item === 'Client Stories') {
                         scrollToSection('reviews');
+                      } else if (item === 'About Us') {
+                        scrollToSection('about');
+                      } else if (item === 'Manufacturing Process') {
+                        scrollToSection('process');
                       } else {
                         scrollToSection(item.toLowerCase().replace(' ', '-'));
                       }
