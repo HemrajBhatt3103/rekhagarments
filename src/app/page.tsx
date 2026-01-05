@@ -1271,7 +1271,7 @@ export default function Home() {
               {
                 client: "IT Services Major",
                 industry: "Technology",
-                quantity: "450 executive sets",
+                quantity: "450 Uniforms",
                 timeline: "4-week production",
                 outcome: "Premium feel with moisture-wicking fabrics",
                 challenge: "Dress code transition from formal to business casual",
@@ -1280,7 +1280,7 @@ export default function Home() {
               {
                 client: "Healthcare Network",
                 industry: "Healthcare",
-                quantity: "1,200 sets",
+                quantity: "1,200 Uniforms",
                 timeline: "8-week program",
                 outcome: "Anti-microbial fabrics with easy maintenance",
                 challenge: "Compliance with infection control protocols",
@@ -1289,7 +1289,7 @@ export default function Home() {
               {
                 client: "Manufacturing Group",
                 industry: "Industrial",
-                quantity: "3,500 workwear sets",
+                quantity: "3,500 Uniforms",
                 timeline: "Quarterly rollout",
                 outcome: "40% reduction in uniform replacement costs",
                 challenge: "Durability requirements for harsh factory conditions",
@@ -1298,7 +1298,7 @@ export default function Home() {
               {
                 client: "Banking Institution",
                 industry: "Finance",
-                quantity: "850 blazer sets",
+                quantity: "850 Uniforms",
                 timeline: "5-week delivery",
                 outcome: "Year-round comfort with all-season fabrics",
                 challenge: "Brand consistency across 22 branches",
@@ -1679,7 +1679,7 @@ export default function Home() {
                     <div className="min-w-0">
                       <div className="font-semibold text-neutral-900 text-sm sm:text-base">Phone</div>
                       <div className="text-neutral-600 text-xs sm:text-sm mt-0.5">+91 94797 88000 / +91 94263 23279</div>
-                      <div className="text-xs text-neutral-500 mt-1">Mon-Sat, 9AM-6PM</div>
+                      <div className="text-xs text-neutral-500 mt-1">Mon :- 10-2 & Tue-Sun :- 10-8</div>
                     </div>
                   </div>
 
