@@ -1518,77 +1518,77 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-gradient-to-b from-white to-neutral-50/50">
+      <section id="contact" className="py-16 sm:py-24 bg-gradient-to-b from-white to-neutral-50/50">
         <div className="container mx-auto px-4">
           <motion.div
-            className="text-center max-w-3xl mx-auto mb-16"
+            className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <Badge className="mb-4 bg-white text-neutral-800 border-neutral-200/50">Start Your Project</Badge>
-            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+            <Badge className="mb-3 sm:mb-4 bg-white text-neutral-800 border-neutral-200/50 text-sm">Start Your Project</Badge>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-neutral-900 mb-4 sm:mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
               Ready for Precision Manufacturing?
             </h2>
-            <p className="text-lg text-neutral-600">
+            <p className="text-base sm:text-lg text-neutral-600">
               Contact our team for a detailed consultation and custom quote.
             </p>
           </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <Card className="p-8 h-full bg-white border border-neutral-200/50 shadow-lg">
-                <h3 className="text-2xl font-bold mb-6 text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
+              <Card className="p-4 sm:p-6 md:p-8 h-full bg-white border border-neutral-200/50 shadow-lg">
+                <h3 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
                   Request a Detailed Quote
                 </h3>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-neutral-700 mb-2">Name *</label>
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="sm:col-span-1">
+                      <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-1 sm:mb-2">Name *</label>
                       <Input
                         placeholder="Your full name"
                         required
-                        className="border-neutral-300/50 focus:border-primary"
+                        className="border-neutral-300/50 focus:border-primary text-sm sm:text-base"
                         value={contactForm.name}
                         onChange={(e) => handleContactChange('name', e.target.value)}
                       />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-neutral-700 mb-2">Company Name *</label>
+                    <div className="sm:col-span-1">
+                      <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-1 sm:mb-2">Company Name *</label>
                       <Input
                         placeholder="Organization"
                         required
-                        className="border-neutral-300/50 focus:border-primary"
+                        className="border-neutral-300/50 focus:border-primary text-sm sm:text-base"
                         value={contactForm.company}
                         onChange={(e) => handleContactChange('company', e.target.value)}
                       />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-neutral-700 mb-2">Email *</label>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
+                    <div className="sm:col-span-1">
+                      <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-1 sm:mb-2">Email *</label>
                       <Input
                         type="email"
                         placeholder="corporate@email.com"
                         required
-                        className="border-neutral-300/50 focus:border-primary"
+                        className="border-neutral-300/50 focus:border-primary text-sm sm:text-base"
                         value={contactForm.email}
                         onChange={(e) => handleContactChange('email', e.target.value)}
                       />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-neutral-700 mb-2">Phone/WhatsApp *</label>
+                    <div className="sm:col-span-1">
+                      <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-1 sm:mb-2">Phone/WhatsApp *</label>
                       <Input
                         placeholder="+91 98765 43210"
                         required
-                        className="border-neutral-300/50 focus:border-primary"
+                        className="border-neutral-300/50 focus:border-primary text-sm sm:text-base"
                         value={contactForm.phone}
                         onChange={(e) => handleContactChange('phone', e.target.value)}
                       />
@@ -1596,64 +1596,64 @@ export default function Home() {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">Requirement Type *</label>
+                    <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-1 sm:mb-2">Requirement Type *</label>
                     <Select required onValueChange={(val) => handleContactChange('requirement', val)} value={contactForm.requirement}>
-                      <SelectTrigger className="border-neutral-300/50 focus:border-primary">
+                      <SelectTrigger className="border-neutral-300/50 focus:border-primary text-sm sm:text-base">
                         <SelectValue placeholder="Select apparel program" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="corporate">Corporate Uniform Program</SelectItem>
-                        <SelectItem value="promotional">Promotional & Event Wear</SelectItem>
-                        <SelectItem value="workwear">Industrial Workwear</SelectItem>
-                        <SelectItem value="custom">Custom Manufacturing</SelectItem>
+                        <SelectItem value="corporate" className="text-sm">Corporate Uniform Program</SelectItem>
+                        <SelectItem value="promotional" className="text-sm">Promotional & Event Wear</SelectItem>
+                        <SelectItem value="workwear" className="text-sm">Industrial Workwear</SelectItem>
+                        <SelectItem value="custom" className="text-sm">Custom Manufacturing</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">Approximate Quantity</label>
-                    <div className="flex space-x-2">
+                    <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-1 sm:mb-2">Approximate Quantity</label>
+                    <div className="flex flex-col sm:flex-row gap-2 sm:space-x-2">
                       <Input
                         placeholder="e.g., 500"
-                        className="border-neutral-300/50 focus:border-primary flex-1"
+                        className="border-neutral-300/50 focus:border-primary flex-1 text-sm sm:text-base"
                         value={contactForm.quantity}
                         onChange={(e) => handleContactChange('quantity', e.target.value)}
                       />
                       <Select onValueChange={(val) => handleContactChange('qtyUnit', val)} value={contactForm.qtyUnit}>
-                        <SelectTrigger className="border-neutral-300/50 focus:border-primary w-32">
+                        <SelectTrigger className="border-neutral-300/50 focus:border-primary text-sm sm:text-base w-full sm:w-32">
                           <SelectValue placeholder="Units" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="units">Units</SelectItem>
-                          <SelectItem value="sets">Sets</SelectItem>
-                          <SelectItem value="pieces">Pieces</SelectItem>
+                          <SelectItem value="units" className="text-sm">Units</SelectItem>
+                          <SelectItem value="sets" className="text-sm">Sets</SelectItem>
+                          <SelectItem value="pieces" className="text-sm">Pieces</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-neutral-700 mb-2">Project Details / Requirements</label>
+                    <label className="block text-xs sm:text-sm font-medium text-neutral-700 mb-1 sm:mb-2">Project Details / Requirements</label>
                     <Textarea
                       placeholder="Tell us about your project timeline, branding needs, fabric preferences..."
-                      rows={4}
-                      className="border-neutral-300/50 focus:border-primary"
+                      rows={3}
+                      className="border-neutral-300/50 focus:border-primary text-sm sm:text-base min-h-[100px]"
                       value={contactForm.details}
                       onChange={(e) => handleContactChange('details', e.target.value)}
                     />
                   </div>
 
-                  <div className="flex items-center text-sm text-neutral-500">
-                    <Timer className="w-4 h-4 mr-2" />
+                  <div className="flex items-start sm:items-center text-xs sm:text-sm text-neutral-500">
+                    <Timer className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 flex-shrink-0 mt-0.5 sm:mt-0" />
                     <span>Response time: Under 4 working hours for corporate enquiries</span>
                   </div>
 
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary hover:to-primary text-white py-6 text-base"
+                    className="w-full bg-gradient-to-r from-primary to-primary/90 hover:from-primary hover:to-primary text-white py-4 sm:py-6 text-sm sm:text-base"
                   >
                     Request Detailed Quote
-                    <ArrowRight className="w-5 h-5 ml-2" />
+                    <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 ml-2" />
                   </Button>
                 </form>
               </Card>
@@ -1664,62 +1664,64 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="space-y-8"
+              className="space-y-6 sm:space-y-8"
             >
               {/* Contact Info */}
-              <Card className="p-6 bg-gradient-to-br from-white to-neutral-50 border border-neutral-200/50">
-                <h3 className="text-xl font-bold mb-6 text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
+              <Card className="p-4 sm:p-6 bg-gradient-to-br from-white to-neutral-50 border border-neutral-200/50">
+                <h3 className="text-lg sm:text-xl font-bold mb-4 sm:mb-6 text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
                   Contact Channels
                 </h3>
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4 p-4 rounded-lg bg-white border border-neutral-200/30 hover:border-primary/30 transition-colors group">
-                    <div className="p-2 bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors">
-                      <Phone className="w-5 h-5 text-primary" />
+                <div className="space-y-4 sm:space-y-6">
+                  <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg bg-white border border-neutral-200/30 hover:border-primary/30 transition-colors group">
+                    <div className="p-2 bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors flex-shrink-0">
+                      <Phone className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                     </div>
-                    <div>
-                      <div className="font-semibold text-neutral-900">Phone</div>
-                      <div className="text-neutral-600">+91 94797 88000 / +91 94263 23279</div>
-                      <div className="text-sm text-neutral-500 mt-1">Mon-Sat, 9AM-6PM</div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start space-x-4 p-4 rounded-lg bg-white border border-neutral-200/30 hover:border-green-500/30 transition-colors group">
-                    <div className="p-2 bg-green-500/5 rounded-lg group-hover:bg-green-500/10 transition-colors">
-                      <MessageCircle className="w-5 h-5 text-green-600" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-neutral-900">WhatsApp Business</div>
-                      <div className="text-neutral-600">+91 94797 88000 / +91 94263 23279</div>
-                      <Badge className="mt-1 bg-green-500/10 text-green-700 border-green-500/20">Preferred for bulk enquiries</Badge>
+                    <div className="min-w-0">
+                      <div className="font-semibold text-neutral-900 text-sm sm:text-base">Phone</div>
+                      <div className="text-neutral-600 text-xs sm:text-sm mt-0.5">+91 94797 88000 / +91 94263 23279</div>
+                      <div className="text-xs text-neutral-500 mt-1">Mon-Sat, 9AM-6PM</div>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-4 p-4 rounded-lg bg-white border border-neutral-200/30 hover:border-accent/30 transition-colors group">
-                    <div className="p-2 bg-accent/5 rounded-lg group-hover:bg-accent/10 transition-colors">
-                      <Mail className="w-5 h-5 text-accent" />
+                  <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg bg-white border border-neutral-200/30 hover:border-green-500/30 transition-colors group">
+                    <div className="p-2 bg-green-500/5 rounded-lg group-hover:bg-green-500/10 transition-colors flex-shrink-0">
+                      <MessageCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-600" />
                     </div>
-                    <div>
-                      <div className="font-semibold text-neutral-900">Email</div>
-                      <div className="space-y-1">
-                        <div className="text-neutral-600">contact@rekhagarments.com</div>
-                        <div className="text-neutral-600">support@rekhagarments.com</div>
-                        <div className="text-neutral-600">rekhagarments2007@yahoo.co.in</div>
+                    <div className="min-w-0">
+                      <div className="font-semibold text-neutral-900 text-sm sm:text-base">WhatsApp Business</div>
+                      <div className="text-neutral-600 text-xs sm:text-sm mt-0.5">+91 94797 88000 / +91 94263 23279</div>
+                      <Badge className="mt-1 bg-green-500/10 text-green-700 border-green-500/20 text-xs">Preferred for bulk enquiries</Badge>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg bg-white border border-neutral-200/30 hover:border-accent/30 transition-colors group">
+                    <div className="p-2 bg-accent/5 rounded-lg group-hover:bg-accent/10 transition-colors flex-shrink-0">
+                      <Mail className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="font-semibold text-neutral-900 text-sm sm:text-base">Email</div>
+                      <div className="space-y-0.5 sm:space-y-1">
+                        <div className="text-neutral-600 text-xs sm:text-sm">contact@rekhagarments.com</div>
+                        <div className="text-neutral-600 text-xs sm:text-sm">support@rekhagarments.com</div>
+                        <div className="text-neutral-600 text-xs sm:text-sm">rekhagarments2007@yahoo.co.in</div>
                       </div>
-                      <div className="text-sm text-neutral-500 mt-1">Response within 24 hours</div>
+                      <div className="text-xs text-neutral-500 mt-1">Response within 24 hours</div>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-4 p-4 rounded-lg bg-white border border-neutral-200/30 hover:border-primary/30 transition-colors group">
-                    <div className="p-2 bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors">
-                      <MapPin className="w-5 h-5 text-primary" />
+                  <div className="flex items-start space-x-3 sm:space-x-4 p-3 sm:p-4 rounded-lg bg-white border border-neutral-200/30 hover:border-primary/30 transition-colors group">
+                    <div className="p-2 bg-primary/5 rounded-lg group-hover:bg-primary/10 transition-colors flex-shrink-0">
+                      <MapPin className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                     </div>
-                    <div>
-                      <div className="font-semibold text-neutral-900">Factory & Office</div>
-                      <div className="text-neutral-600">
+                    <div className="min-w-0">
+                      <div className="font-semibold text-neutral-900 text-sm sm:text-base">Factory & Office</div>
+                      <div className="text-neutral-600 text-xs sm:text-sm mt-0.5">
                         RG, Opposite Rajhans Buisness Hub, Raopura Road, Vadodara Gujarat 390001
                       </div>
-                      <div className="text-sm text-neutral-500 mt-1">
-                        <a href="https://maps.app.goo.gl/r5U6JSRfDdcG2WZH7?g_st=ac" className="text-primary hover:underline">Get directions ↗</a>
+                      <div className="text-xs text-neutral-500 mt-1">
+                        <a href="https://maps.app.goo.gl/r5U6JSRfDdcG2WZH7?g_st=ac" className="text-primary hover:underline inline-flex items-center">
+                          Get directions <ArrowRight className="w-3 h-3 ml-1" />
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -1727,24 +1729,24 @@ export default function Home() {
               </Card>
 
               {/* Response Guarantee */}
-              <Card className="p-6 bg-gradient-to-r from-primary to-primary/90 text-white">
-                <h3 className="text-xl font-bold mb-4" style={{ fontFamily: BRAND.fonts.heading }}>
+              <Card className="p-4 sm:p-6 bg-gradient-to-r from-primary to-primary/90 text-white">
+                <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4" style={{ fontFamily: BRAND.fonts.heading }}>
                   Corporate Response Protocol
                 </h3>
-                <p className="mb-6 opacity-90">
+                <p className="mb-4 sm:mb-6 opacity-90 text-sm sm:text-base">
                   We prioritize B2B enquiries with a structured response workflow:
                 </p>
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center p-3 bg-white/10 rounded-lg backdrop-blur-sm">
-                    <div className="text-2xl font-bold mb-1">4 Hrs</div>
-                    <div className="text-sm opacity-75">Initial Response</div>
+                <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 sm:gap-4">
+                  <div className="text-center p-2 sm:p-3 bg-white/10 rounded-lg backdrop-blur-sm">
+                    <div className="text-xl sm:text-2xl font-bold mb-1">4 Hrs</div>
+                    <div className="text-xs sm:text-sm opacity-75">Initial Response</div>
                   </div>
-                  <div className="text-center p-3 bg-white/10 rounded-lg backdrop-blur-sm">
-                    <div className="text-2xl font-bold mb-1">24 Hrs</div>
-                    <div className="text-sm opacity-75">Detailed Quote</div>
+                  <div className="text-center p-2 sm:p-3 bg-white/10 rounded-lg backdrop-blur-sm">
+                    <div className="text-xl sm:text-2xl font-bold mb-1">24 Hrs</div>
+                    <div className="text-xs sm:text-sm opacity-75">Detailed Quote</div>
                   </div>
-                  <div className="text-center p-3 bg-white/10 rounded-lg backdrop-blur-sm col-span-2">
-                    <div className="text-sm opacity-90">Dedicated account manager assigned for orders above 500 units</div>
+                  <div className="text-center p-2 sm:p-3 bg-white/10 rounded-lg backdrop-blur-sm col-span-2">
+                    <div className="text-xs sm:text-sm opacity-90">Dedicated account manager for orders above 500 units</div>
                   </div>
                 </div>
               </Card>
