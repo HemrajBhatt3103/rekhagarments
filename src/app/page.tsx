@@ -272,10 +272,10 @@ export default function Home() {
               style={{ fontFamily: BRAND.fonts.heading }}
               variants={itemVariants}
             >
-              <span className="block text-4xl md:text-6xl lg:text-8xl font-bold text-neutral-900">
+              <span className="block text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold text-neutral-900">
                 Corporate Identity
               </span>
-              <span className="block text-4xl md:text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-accent">
+              <span className="block text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-accent">
                 Through Precision Apparel
               </span>
             </motion.h1>
@@ -398,7 +398,7 @@ export default function Home() {
                 <Timer className="w-4 h-4 text-neutral-400" />
                 <span className="text-sm text-neutral-500">SLA-driven workflow</span>
               </div>
-              <h3 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
                 Streamlined Corporate Ordering Process
               </h3>
               <div className="space-y-4">
@@ -479,13 +479,13 @@ export default function Home() {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8 }}
             >
-              <div className="sticky top-32">
+              <div className="lg:sticky lg:top-32">
                 <div className="inline-flex items-center space-x-2 mb-6">
                   <div className="h-0.5 w-8 bg-accent"></div>
                   <span className="text-accent font-bold uppercase tracking-widest text-sm">Our Legacy</span>
                 </div>
 
-                <h2 className="text-4xl lg:text-5xl font-bold text-neutral-900 mb-8 leading-tight" style={{ fontFamily: BRAND.fonts.heading }}>
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-neutral-900 mb-8 leading-tight" style={{ fontFamily: BRAND.fonts.heading }}>
                   From Vadodara's Workshops to India's Boardrooms
                 </h2>
 
@@ -499,7 +499,7 @@ export default function Home() {
                 </div>
 
                 {/* Key Highlights */}
-                <div className="mt-10 grid grid-cols-2 gap-6">
+                <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {[
                     { icon: Layers, text: "In-House Production", detail: "Full control from fabric to finish" },
                     { icon: Feather, text: "Premium Materials", detail: "Sourced directly from mills" },
@@ -552,7 +552,7 @@ export default function Home() {
               className="space-y-8"
             >
               {/* Production Stats */}
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <motion.div
                   className="bg-gradient-to-br from-neutral-50 to-white p-6 rounded-2xl border border-neutral-200/50 shadow-lg"
                   whileHover={{ y: -5 }}
@@ -580,7 +580,7 @@ export default function Home() {
                 </motion.div>
 
                 <motion.div
-                  className="bg-white p-6 rounded-2xl shadow-lg border-t-4 border-accent col-span-2"
+                  className="bg-white p-6 rounded-2xl shadow-lg border-t-4 border-accent col-span-1 sm:col-span-2"
                   whileHover={{ y: -5 }}
                   transition={{ duration: 0.2 }}
                 >
@@ -600,63 +600,64 @@ export default function Home() {
               </div>
 
               {/* Manufacturing Process Illustration */}
-              <div className="relative p-8 rounded-2xl bg-gradient-to-br from-neutral-50 to-white border border-neutral-200/50 overflow-hidden">
+              <div className="relative p-4 md:p-8 rounded-2xl bg-gradient-to-br from-neutral-50 to-white border border-neutral-200/50 overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/5 to-transparent rounded-full -mr-16 -mt-16"></div>
                 <h3 className="text-xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>Our Production Flow</h3>
                 <div className="relative">
-                  <div className="flex items-center justify-between mb-8">
-                    {
-                      [
-                        { name: 'Fabric', icon: '/icons/fabric.png' },
-                        { name: 'Cutting', icon: '/icons/cutting.png' },
-                        { name: 'Stitching', icon: '/icons/stitching.png' },
-                        { name: 'Printing', icon: '/icons/printing.jpg' },
-                        { name: 'QC', icon: '/icons/quality.png' },
-                        { name: 'Pack', icon: '/icons/pack.png' }
-                      ].map((step, i) => {
-                        const isActive = i === activeProcessStep;
-                        return (
-                          <div key={i} className="flex flex-col items-center z-10 relative">
-                            <div
-                              className={`
+                  <div className="relative">
+                    <div className="grid grid-cols-3 gap-y-6 md:flex md:items-center md:justify-between mb-8">
+                      {
+                        [
+                          { name: 'Fabric', icon: '/icons/fabric.png' },
+                          { name: 'Cutting', icon: '/icons/cutting.png' },
+                          { name: 'Stitching', icon: '/icons/stitching.png' },
+                          { name: 'Printing', icon: '/icons/printing.jpg' },
+                          { name: 'QC', icon: '/icons/quality.png' },
+                          { name: 'Pack', icon: '/icons/pack.png' }
+                        ].map((step, i) => {
+                          const isActive = i === activeProcessStep;
+                          return (
+                            <div key={i} className="flex flex-col items-center z-10 relative">
+                              <div
+                                className={`
                                 w-14 h-14 rounded-full flex items-center justify-center mb-3 overflow-hidden p-2.5 transition-all duration-500
                                 ${isActive
-                                  ? 'bg-white border-2 border-primary shadow-[0_0_15px_rgba(26,54,93,0.3)] scale-110'
-                                  : 'bg-neutral-50 border border-neutral-200 grayscale opacity-70 scale-100'}
+                                    ? 'bg-white border-2 border-primary shadow-[0_0_15px_rgba(26,54,93,0.3)] scale-110'
+                                    : 'bg-neutral-50 border border-neutral-200 grayscale opacity-70 scale-100'}
                               `}
-                            >
-                              <img
-                                src={step.icon}
-                                alt={step.name}
-                                className="w-full h-full object-contain"
-                              />
-                            </div>
-                            <span
-                              className={`
+                              >
+                                <img
+                                  src={step.icon}
+                                  alt={step.name}
+                                  className="w-full h-full object-contain"
+                                />
+                              </div>
+                              <span
+                                className={`
                                 text-xs font-bold transition-colors duration-300
                                 ${isActive ? 'text-primary' : 'text-neutral-400'}
                               `}
-                            >
-                              {step.name}
-                            </span>
+                              >
+                                {step.name}
+                              </span>
 
-                            {/* Connecting Line Segment - logic to color it based on progress */}
-                            {i < 5 && (
-                              <div className="absolute top-7 left-1/2 w-[calc(100%_+_2rem)] h-0.5 -z-10">
-                                <div className="w-full h-full bg-neutral-200"></div>
-                                <div
-                                  className="absolute top-0 left-0 h-full bg-primary transition-all duration-1000 ease-linear"
-                                  style={{
-                                    width: activeProcessStep > i ? '100%' : '0%'
-                                  }}
-                                ></div>
-                              </div>
-                            )}
-                          </div>
-                        );
-                      })}
+                              {/* Connecting Line Segment - logic to color it based on progress */}
+                              {i < 5 && (
+                                <div className="hidden md:block absolute top-7 left-1/2 w-[calc(100%_+_2rem)] h-0.5 -z-10">
+                                  <div className="w-full h-full bg-neutral-200"></div>
+                                  <div
+                                    className="absolute top-0 left-0 h-full bg-primary transition-all duration-1000 ease-linear"
+                                    style={{
+                                      width: activeProcessStep > i ? '100%' : '0%'
+                                    }}
+                                  ></div>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                    </div>
                   </div>
-
                 </div>
                 <p className="text-sm text-neutral-500 mt-6">
                   Each stage monitored by quality controllers with 32-point inspection checklist
@@ -732,7 +733,7 @@ export default function Home() {
               { name: 'Navarachna International', image: '/our_clients/navarachna_international.jpeg' },
               { name: 'Parul University', image: '/our_clients/parul_university.jpg' },
               { name: 'Siemens', image: '/our_clients/siemens.jpg' },
-              { name: 'Surat Marathon', image: '/our_clients/surat_marathon.jpg' },
+              { name: 'MSU', image: '/our_clients/msu.jpg' },
               { name: 'Vadodara Marathon', image: '/our_clients/vadodara_marathon.jpg' },
             ].map((client, index) => (
               <div key={index} className="flex flex-col items-center justify-center flex-shrink-0 group">
@@ -763,7 +764,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Leadership Team</Badge>
-            <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
               Guided by Experience & Vision
             </h2>
             <p className="text-lg text-neutral-600">
@@ -780,7 +781,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             <Card className="border border-accent/20 bg-gradient-to-br from-white to-accent/5 overflow-hidden">
-              <CardContent className="p-8">
+              <CardContent className="p-5 md:p-8">
                 <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                   <div className="flex-shrink-0">
                     <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center border-4 border-white shadow-lg">
@@ -902,7 +903,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Engagement Model</Badge>
-            <h2 className="text-4xl font-bold text-neutral-900 mb-4" style={{ fontFamily: BRAND.fonts.heading }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4" style={{ fontFamily: BRAND.fonts.heading }}>
               How Corporate Engagement Works
             </h2>
             <p className="text-lg text-neutral-600">
@@ -962,7 +963,7 @@ export default function Home() {
                 transition={{ duration: 0.6, delay: index * 0.2 }}
               >
                 {/* Content Side */}
-                <div className={`flex-1 w-full pl-16 md:pl-0 md:w-1/2 ${index % 2 === 0 ? 'md:pl-24 md:pr-12' : 'md:px-12'}`}>
+                <div className={`flex-1 w-full pl-12 md:pl-0 md:w-1/2 ${index % 2 === 0 ? 'md:pl-24 md:pr-12' : 'md:px-12'}`}>
                   <div className={`${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
                     <div className="inline-flex items-center space-x-2 mb-4">
                       <Badge className="bg-gradient-to-r from-primary/10 to-primary/5 text-primary border-primary/20">
@@ -1026,7 +1027,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             <Badge className="mb-4 bg-white text-neutral-800 border-neutral-200/50 shadow-sm">Specialized Solutions</Badge>
-            <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
               Industry-Specific Apparel Programs
             </h2>
             <p className="text-lg text-neutral-600">
@@ -1133,7 +1134,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <motion.div className="text-center max-w-3xl mx-auto mb-16">
             <Badge className="mb-4 bg-white text-neutral-800 border-neutral-200/50">Complete Apparel Solutions</Badge>
-            <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
               Comprehensive Manufacturing Portfolio
             </h2>
             <p className="text-lg text-neutral-600">
@@ -1248,7 +1249,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             <Badge className="mb-4 bg-white text-neutral-800 border-neutral-200/50">Case Studies</Badge>
-            <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
               Real Projects, Measurable Results
             </h2>
             <p className="text-lg text-neutral-600">
@@ -1411,7 +1412,7 @@ export default function Home() {
               </div>
             </div>
 
-            <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
               Trusted by Procurement Leaders
             </h2>
             <p className="text-lg text-neutral-600">
@@ -1527,7 +1528,7 @@ export default function Home() {
             transition={{ duration: 0.6 }}
           >
             <Badge className="mb-4 bg-white text-neutral-800 border-neutral-200/50">Start Your Project</Badge>
-            <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+            <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
               Ready for Precision Manufacturing?
             </h2>
             <p className="text-lg text-neutral-600">
@@ -1614,7 +1615,7 @@ export default function Home() {
                     <div className="flex space-x-2">
                       <Input
                         placeholder="e.g., 500"
-                        className="border-neutral-300/50 focus:border-primary"
+                        className="border-neutral-300/50 focus:border-primary flex-1"
                         value={contactForm.quantity}
                         onChange={(e) => handleContactChange('quantity', e.target.value)}
                       />

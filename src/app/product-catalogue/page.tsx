@@ -21,7 +21,8 @@ import {
     Building, Users as UsersIcon, Ruler, Heart, Sparkles, Gift,
     GraduationCap, School, Target as TargetIcon, Calendar,
     ShoppingBag as ShoppingBagIcon, Star as StarIcon, FileText,
-    Zap, CheckCircle, Heart as HeartIcon, Compass, Image as ImageIcon
+    Zap, CheckCircle, Heart as HeartIcon, Compass, Image as ImageIcon,
+    ChevronLeft, ChevronDown
 } from 'lucide-react';
 
 // ============================================
@@ -54,8 +55,11 @@ function ProductCatalogContent() {
     const [isScrolled, setIsScrolled] = useState(false);
     const [activeTab, setActiveTab] = useState('all');
     const [activeGalleryFilter, setActiveGalleryFilter] = useState('All');
-    const statsRef = useRef(null);
+    const [showGalleryFilters, setShowGalleryFilters] = useState(false);
+    const statsRef = useRef<HTMLDivElement>(null);
     const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" });
+    const tabsContainerRef = useRef<HTMLDivElement>(null);
+    const galleryFiltersRef = useRef<HTMLDivElement>(null);
 
     const whatsappMessage = "Hello! I'm interested in your product catalog and would like to request a quote."
     const whatsappUrl = `https://wa.me/919426323279?text=${encodeURIComponent(whatsappMessage)}`
@@ -72,7 +76,6 @@ function ProductCatalogContent() {
         const tabParam = searchParams.get('tab');
         if (tabParam) {
             setActiveTab(tabParam);
-            // Scroll to catalog section if needed, or just let page load
             const catalogSection = document.getElementById('catalog-section');
             if (catalogSection) {
                 catalogSection.scrollIntoView({ behavior: 'smooth' });
@@ -81,6 +84,20 @@ function ProductCatalogContent() {
 
         return () => window.removeEventListener('scroll', handleScroll);
     }, [searchParams]);
+
+    useEffect(() => {
+        // Scroll active tab into view on mobile
+        if (tabsContainerRef.current) {
+            const activeTabElement = tabsContainerRef.current.querySelector('[data-state="active"]');
+            if (activeTabElement) {
+                activeTabElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'center'
+                });
+            }
+        }
+    }, [activeTab]);
 
     const scrollToHomeContact = () => {
         window.location.href = '/#contact';
@@ -336,39 +353,39 @@ function ProductCatalogContent() {
                         <motion.div className="mb-8 mt-16">
                             <Badge className="bg-white/80 backdrop-blur-sm border-neutral-200/50 text-neutral-800 hover:bg-white px-4 py-1.5 shadow-sm mb-4">
                                 <Award className="w-3.5 h-3.5 fill-accent text-accent mr-2" />
-                                <span className="font-medium tracking-wide">Complete Manufacturing Portfolio • 50+ Product Variants</span>
+                                <span className="font-medium tracking-wide text-sm sm:text-base">Complete Manufacturing Portfolio • 50+ Product Variants</span>
                             </Badge>
-                            <div className="flex items-center justify-center space-x-2 text-sm text-neutral-600">
-                                <Factory className="w-4 h-4" />
+                            <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm text-neutral-600 px-4">
+                                <Factory className="w-3 h-3 sm:w-4 sm:h-4" />
                                 <span>Vadodara-based manufacturing since 2004 • Bulk orders available</span>
                             </div>
                         </motion.div>
 
                         <motion.h1
-                            className="mb-8 leading-[1.1] tracking-tight"
+                            className="mb-8 leading-[1.1] tracking-tight px-4"
                             style={{ fontFamily: BRAND.fonts.heading }}
                         >
-                            <span className="block text-4xl md:text-6xl lg:text-7xl font-bold text-neutral-900">
+                            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900">
                                 Complete Product Catalog
                             </span>
-                            <span className="block text-3xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-accent">
+                            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-accent mt-2 sm:mt-4">
                                 Your Comprehensive Apparel Solution
                             </span>
                         </motion.h1>
 
-                        <motion.p className="text-xl md:text-2xl text-neutral-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+                        <motion.p className="text-lg sm:text-xl md:text-2xl text-neutral-600 mb-10 max-w-3xl mx-auto leading-relaxed px-4">
                             From basic T-shirts to complete uniform programs. Explore our comprehensive range of
                             apparel manufacturing solutions for corporate, educational, and festive needs.
                         </motion.p>
 
-                        <motion.div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+                        <motion.div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16 px-4">
                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                                 <Button
                                     size="lg"
-                                    className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary hover:to-primary/80 text-white px-8 py-6 text-lg h-auto rounded-xl shadow-xl shadow-primary/20 hover:shadow-2xl transition-all group"
+                                    className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary hover:to-primary/80 text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg h-auto rounded-xl shadow-xl shadow-primary/20 hover:shadow-2xl transition-all group w-full sm:w-auto"
                                     onClick={scrollToHomeContact}
                                 >
-                                    <span className="flex items-center">
+                                    <span className="flex items-center justify-center sm:justify-start">
                                         <FileText className="w-5 h-5 mr-2" />
                                         Order Now
                                         <ChevronRight className="w-5 h-5 ml-2 transform transition-transform group-hover:translate-x-1" />
@@ -380,10 +397,10 @@ function ProductCatalogContent() {
                                 <Button
                                     variant="outline"
                                     size="lg"
-                                    className="bg-white/80 backdrop-blur-sm border-neutral-200/50 text-neutral-700 px-8 py-6 text-lg h-auto rounded-xl"
+                                    className="bg-white/80 backdrop-blur-sm border-neutral-200/50 text-neutral-700 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg h-auto rounded-xl w-full sm:w-auto"
                                     onClick={() => window.open(whatsappUrl, '_blank')}
                                 >
-                                    <span className="flex items-center">
+                                    <span className="flex items-center justify-center sm:justify-start">
                                         <MessageCircle className="w-5 h-5 mr-2 text-green-600" />
                                         WhatsApp for Bulk Pricing
                                     </span>
@@ -394,7 +411,7 @@ function ProductCatalogContent() {
                         {/* Stats */}
                         <motion.div
                             ref={statsRef}
-                            className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-neutral-200/50 pt-8"
+                            className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 border-t border-neutral-200/50 pt-8 px-4"
                         >
                             {[
                                 { value: 50, label: "Product Variants", suffix: "+" },
@@ -402,8 +419,8 @@ function ProductCatalogContent() {
                                 { value: 98.7, label: "Quality Rating", suffix: "%" },
                                 { value: 21, label: "Years Experience", suffix: "+" },
                             ].map((stat, i) => (
-                                <div key={i} className="text-center p-4 rounded-xl bg-white/50 backdrop-blur-sm border border-neutral-200/30">
-                                    <div className="font-bold text-3xl text-primary mb-1" style={{ fontFamily: BRAND.fonts.heading }}>
+                                <div key={i} className="text-center p-3 sm:p-4 rounded-xl bg-white/50 backdrop-blur-sm border border-neutral-200/30">
+                                    <div className="font-bold text-2xl sm:text-3xl text-primary mb-1" style={{ fontFamily: BRAND.fonts.heading }}>
                                         {isStatsInView ? (
                                             <CountUp
                                                 end={stat.value}
@@ -416,7 +433,7 @@ function ProductCatalogContent() {
                                             '0' + (stat.suffix || '')
                                         )}
                                     </div>
-                                    <div className="text-sm font-medium text-neutral-500 uppercase tracking-wide">{stat.label}</div>
+                                    <div className="text-xs sm:text-sm font-medium text-neutral-500 uppercase tracking-wide">{stat.label}</div>
                                 </div>
                             ))}
                         </motion.div>
@@ -425,61 +442,74 @@ function ProductCatalogContent() {
             </section>
 
             {/* Product Categories Tabs */}
-            <section id="catalog-section" className="py-24 bg-gradient-to-b from-white to-neutral-50/50">
+            <section id="catalog-section" className="py-16 sm:py-24 bg-gradient-to-b from-white to-neutral-50/50">
                 <div className="container mx-auto px-4">
                     <motion.div
-                        className="text-center max-w-3xl mx-auto mb-16"
+                        className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 px-4"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <Badge className="mb-4 bg-white text-neutral-800 border-neutral-200/50 shadow-sm">Browse by Category</Badge>
-                        <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+                        <Badge className="mb-4 bg-white text-neutral-800 border-neutral-200/50 shadow-sm text-sm">Browse by Category</Badge>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4 sm:mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
                             Complete Product Range
                         </h2>
-                        <p className="text-lg text-neutral-600">
+                        <p className="text-base sm:text-lg text-neutral-600">
                             Explore our comprehensive manufacturing capabilities across all apparel categories.
                         </p>
                     </motion.div>
 
-                    {/* Category Tabs */}
+                    {/* Category Tabs - Mobile Optimized */}
                     <Tabs value={activeTab} className="max-w-7xl mx-auto" onValueChange={setActiveTab}>
-                        <div className="flex justify-center mb-16">
-                            <TabsList className="flex flex-wrap justify-center gap-2 bg-neutral-100/50 p-1 rounded-xl h-auto w-full">
-                                <TabsTrigger value="all" className="data-[state=active]:bg-white">
-                                    <ShoppingBag className="w-4 h-4 mr-2" />
-                                    All Products
-                                </TabsTrigger>
-                                <TabsTrigger value="gallery" className="data-[state=active]:bg-white">
-                                    <ImageIcon className="w-4 h-4 mr-2" />
-                                    Our Gallery
-                                </TabsTrigger>
-                                <TabsTrigger value="t-shirts" className="data-[state=active]:bg-white">
-                                    <Shirt className="w-4 h-4 mr-2" />
-                                    T-Shirts
-                                </TabsTrigger>
-                                <TabsTrigger value="custom-printed" className="data-[state=active]:bg-white">
-                                    <Layers className="w-4 h-4 mr-2" />
-                                    Custom Print
-                                </TabsTrigger>
-                                <TabsTrigger value="uniforms" className="data-[state=active]:bg-white">
-                                    <UsersIcon className="w-4 h-4 mr-2" />
-                                    Uniforms
-                                </TabsTrigger>
-                                <TabsTrigger value="festive" className="data-[state=active]:bg-white">
-                                    <Sparkles className="w-4 h-4 mr-2" />
-                                    Seasonal
-                                </TabsTrigger>
-                                <TabsTrigger value="accessories" className="data-[state=active]:bg-white">
-                                    <Package className="w-4 h-4 mr-2" />
-                                    Accessories
-                                </TabsTrigger>
-                            </TabsList>
+                        <div className="mb-12 sm:mb-16 px-2">
+                            <div className="relative">
+                                <div
+                                    ref={tabsContainerRef}
+                                    className="overflow-x-auto pb-2 -mx-2 px-2 scrollbar-hide"
+                                    style={{
+                                        scrollbarWidth: 'none',
+                                        msOverflowStyle: 'none'
+                                    }}
+                                >
+                                    <TabsList className="flex flex-nowrap min-w-max bg-neutral-100/50 p-1 rounded-xl h-auto">
+                                        <TabsTrigger value="all" className="data-[state=active]:bg-white whitespace-nowrap px-4 py-3">
+                                            <ShoppingBag className="w-4 h-4 mr-2" />
+                                            All Products
+                                        </TabsTrigger>
+                                        <TabsTrigger value="gallery" className="data-[state=active]:bg-white whitespace-nowrap px-4 py-3">
+                                            <ImageIcon className="w-4 h-4 mr-2" />
+                                            Our Gallery
+                                        </TabsTrigger>
+                                        <TabsTrigger value="t-shirts" className="data-[state=active]:bg-white whitespace-nowrap px-4 py-3">
+                                            <Shirt className="w-4 h-4 mr-2" />
+                                            T-Shirts
+                                        </TabsTrigger>
+                                        <TabsTrigger value="custom-printed" className="data-[state=active]:bg-white whitespace-nowrap px-4 py-3">
+                                            <Layers className="w-4 h-4 mr-2" />
+                                            Custom Print
+                                        </TabsTrigger>
+                                        <TabsTrigger value="uniforms" className="data-[state=active]:bg-white whitespace-nowrap px-4 py-3">
+                                            <UsersIcon className="w-4 h-4 mr-2" />
+                                            Uniforms
+                                        </TabsTrigger>
+                                        <TabsTrigger value="festive" className="data-[state=active]:bg-white whitespace-nowrap px-4 py-3">
+                                            <Sparkles className="w-4 h-4 mr-2" />
+                                            Seasonal
+                                        </TabsTrigger>
+                                        <TabsTrigger value="accessories" className="data-[state=active]:bg-white whitespace-nowrap px-4 py-3">
+                                            <Package className="w-4 h-4 mr-2" />
+                                            Accessories
+                                        </TabsTrigger>
+                                    </TabsList>
+                                </div>
+                                {/* Scroll indicator for mobile */}
+                                <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent pointer-events-none sm:hidden"></div>
+                            </div>
                         </div>
 
                         {/* All Products Tab */}
                         <TabsContent value="all" className="mt-0">
-                            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                 {allProducts.map((product, index) => (
                                     <motion.div
                                         key={`${product.categoryId}-${index}`}
@@ -489,23 +519,23 @@ function ProductCatalogContent() {
                                         transition={{ delay: index * 0.05 }}
                                     >
                                         <Card className="h-full hover:shadow-xl transition-all duration-300 border border-neutral-200/50 hover:border-primary/30">
-                                            <CardContent className="p-6">
-                                                <div className="flex items-start justify-between mb-4">
-                                                    <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${product.categoryColor} flex items-center justify-center`}>
-                                                        <product.icon className="w-6 h-6 text-primary" />
+                                            <CardContent className="p-4 sm:p-6">
+                                                <div className="flex items-start justify-between mb-3 sm:mb-4">
+                                                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${product.categoryColor} flex items-center justify-center`}>
+                                                        <product.icon className="w-4 h-4 sm:w-6 sm:h-6 text-primary" />
                                                     </div>
-                                                    <Badge className="bg-primary/10 text-primary border-primary/20">
+                                                    <Badge className="bg-primary/10 text-primary border-primary/20 text-xs">
                                                         {product.category}
                                                     </Badge>
                                                 </div>
 
-                                                <h3 className="text-xl font-bold text-neutral-900 mb-3">{product.name}</h3>
-                                                <p className="text-neutral-600 mb-4 text-sm">{product.description}</p>
+                                                <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2 sm:mb-3">{product.name}</h3>
+                                                <p className="text-neutral-600 mb-3 sm:mb-4 text-sm">{product.description}</p>
 
-                                                <div className="space-y-3 mb-6">
+                                                <div className="space-y-3 mb-4 sm:mb-6">
                                                     <div>
-                                                        <h4 className="text-sm font-semibold text-neutral-700 mb-2">Key Features</h4>
-                                                        <div className="flex flex-wrap gap-2">
+                                                        <h4 className="text-xs sm:text-sm font-semibold text-neutral-700 mb-2">Key Features</h4>
+                                                        <div className="flex flex-wrap gap-1 sm:gap-2">
                                                             {product.features.map((feature, i) => (
                                                                 <span key={i} className="text-xs bg-neutral-100 text-neutral-700 px-2 py-1 rounded">
                                                                     {feature}
@@ -514,7 +544,7 @@ function ProductCatalogContent() {
                                                         </div>
                                                     </div>
 
-                                                    <div className="grid grid-cols-2 gap-4 pt-3 border-t border-neutral-100">
+                                                    <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-3 border-t border-neutral-100">
                                                         <div>
                                                             <div className="text-xs text-neutral-500">Min. Order</div>
                                                             <div className="text-sm font-semibold">{product.minOrder}</div>
@@ -528,7 +558,7 @@ function ProductCatalogContent() {
 
                                                 <Button
                                                     variant="outline"
-                                                    className="w-full text-primary hover:text-primary hover:bg-primary/5"
+                                                    className="w-full text-primary hover:text-primary hover:bg-primary/5 text-sm sm:text-base"
                                                     onClick={scrollToHomeContact}
                                                 >
                                                     Request Quote
@@ -548,37 +578,79 @@ function ProductCatalogContent() {
                                 animate={{ opacity: 1, y: 0 }}
                                 className="mb-10"
                             >
-                                <div className="flex items-center gap-4 mb-8">
-                                    <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500/5 to-pink-600/10 flex items-center justify-center">
-                                        <ImageIcon className="w-8 h-8 text-pink-600" />
+                                <div className="flex items-center gap-4 mb-6 sm:mb-8 px-4">
+                                    <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-pink-500/5 to-pink-600/10 flex items-center justify-center flex-shrink-0">
+                                        <ImageIcon className="w-6 h-6 sm:w-8 sm:h-8 text-pink-600" />
                                     </div>
                                     <div>
-                                        <h3 className="text-3xl font-bold text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
+                                        <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
                                             Our Gallery
                                         </h3>
-                                        <p className="text-neutral-600">Explore our latest designs and collections.</p>
+                                        <p className="text-neutral-600 text-sm sm:text-base">Explore our latest designs and collections.</p>
                                     </div>
                                 </div>
 
-                                {/* Gallery Filter Bar */}
-                                <div className="flex justify-center mb-8">
-                                    <div className="bg-neutral-100/80 p-1 rounded-lg flex space-x-1">
-                                        {['All', 'Tracks', 'School Uniform', 'Polo Tshirts', 'Round Neck Tshirts'].map((filter) => (
-                                            <button
-                                                key={filter}
-                                                onClick={() => setActiveGalleryFilter(filter)}
-                                                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeGalleryFilter === filter
-                                                    ? 'bg-white text-primary shadow-sm'
-                                                    : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/50'
-                                                    }`}
-                                            >
-                                                {filter}
-                                            </button>
-                                        ))}
+                                {/* Gallery Filter Bar - Mobile Optimized */}
+                                <div className="mb-6 sm:mb-8 px-4">
+                                    <div className="sm:hidden">
+                                        {/* Mobile Dropdown */}
+                                        <Button
+                                            variant="outline"
+                                            className="w-full justify-between bg-white border-neutral-200/50"
+                                            onClick={() => setShowGalleryFilters(!showGalleryFilters)}
+                                        >
+                                            <span>Filter: {activeGalleryFilter}</span>
+                                            <ChevronDown className={`w-4 h-4 transition-transform ${showGalleryFilters ? 'rotate-180' : ''}`} />
+                                        </Button>
+
+                                        {showGalleryFilters && (
+                                            <div className="mt-2 bg-white border border-neutral-200/50 rounded-lg shadow-lg p-2 space-y-1 z-10">
+                                                {['All', 'Tracks', 'School Uniform', 'Polo Tshirts', 'Round Neck Tshirts'].map((filter) => (
+                                                    <button
+                                                        key={filter}
+                                                        onClick={() => {
+                                                            setActiveGalleryFilter(filter);
+                                                            setShowGalleryFilters(false);
+                                                        }}
+                                                        className={`w-full text-left px-4 py-2 rounded-md text-sm font-medium transition-all ${activeGalleryFilter === filter
+                                                            ? 'bg-primary/10 text-primary'
+                                                            : 'text-neutral-600 hover:text-neutral-900 hover:bg-neutral-50'
+                                                            }`}
+                                                    >
+                                                        {filter}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Desktop Filter Bar */}
+                                    <div className="hidden sm:flex justify-center">
+                                        <div
+                                            ref={galleryFiltersRef}
+                                            className="bg-neutral-100/80 p-1 rounded-lg flex overflow-x-auto space-x-1 max-w-full"
+                                            style={{
+                                                scrollbarWidth: 'thin',
+                                                scrollbarColor: '#cbd5e1 #f1f5f9'
+                                            }}
+                                        >
+                                            {['All', 'Tracks', 'School Uniform', 'Polo Tshirts', 'Round Neck Tshirts'].map((filter) => (
+                                                <button
+                                                    key={filter}
+                                                    onClick={() => setActiveGalleryFilter(filter)}
+                                                    className={`px-4 py-2 rounded-md text-sm font-medium transition-all whitespace-nowrap ${activeGalleryFilter === filter
+                                                        ? 'bg-white text-primary shadow-sm'
+                                                        : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/50'
+                                                        }`}
+                                                >
+                                                    {filter}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 px-4">
                                     {galleryImages
                                         .filter(img => activeGalleryFilter === 'All' || img.category === activeGalleryFilter)
                                         .map((image, index) => (
@@ -596,15 +668,15 @@ function ProductCatalogContent() {
                                                             alt={image.name}
                                                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                                         />
-                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                                                            <Badge className="bg-white/90 text-neutral-900 backdrop-blur-sm">
+                                                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-3">
+                                                            <Badge className="bg-white/90 text-neutral-900 backdrop-blur-sm text-xs">
                                                                 {image.category}
                                                             </Badge>
                                                         </div>
                                                     </div>
-                                                    <CardContent className="p-4">
-                                                        <h3 className="font-bold text-neutral-900">{image.name}</h3>
-                                                        <p className="text-sm text-neutral-500">{image.category}</p>
+                                                    <CardContent className="p-3">
+                                                        <h3 className="font-bold text-neutral-900 text-sm sm:text-base">{image.name}</h3>
+                                                        <p className="text-xs sm:text-sm text-neutral-500">{image.category}</p>
                                                     </CardContent>
                                                 </Card>
                                             </motion.div>
@@ -619,21 +691,21 @@ function ProductCatalogContent() {
                                 <motion.div
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
-                                    className="mb-10"
+                                    className="mb-10 px-4"
                                 >
-                                    <div className="flex items-center gap-4 mb-8">
-                                        <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center`}>
-                                            <category.icon className="w-8 h-8 text-primary" />
+                                    <div className="flex items-center gap-4 mb-6 sm:mb-8">
+                                        <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center flex-shrink-0`}>
+                                            <category.icon className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
                                         </div>
                                         <div>
-                                            <h3 className="text-3xl font-bold text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
+                                            <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
                                                 {category.name}
                                             </h3>
-                                            <p className="text-neutral-600">{category.description}</p>
+                                            <p className="text-neutral-600 text-sm sm:text-base">{category.description}</p>
                                         </div>
                                     </div>
 
-                                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
                                         {category.products.map((product, index) => (
                                             <motion.div
                                                 key={index}
@@ -643,33 +715,33 @@ function ProductCatalogContent() {
                                                 transition={{ delay: index * 0.1 }}
                                             >
                                                 <Card className="h-full hover:shadow-xl transition-all duration-300 border border-neutral-200/50">
-                                                    <CardContent className="p-6">
-                                                        <div className="flex items-start justify-between mb-4">
-                                                            <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center`}>
-                                                                <product.icon className="w-6 h-6 text-primary" />
+                                                    <CardContent className="p-4 sm:p-6">
+                                                        <div className="flex items-start justify-between mb-3 sm:mb-4">
+                                                            <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center`}>
+                                                                <product.icon className="w-4 h-4 sm:w-6 sm:h-6 text-primary" />
                                                             </div>
-                                                            <Badge className="bg-primary/10 text-primary border-primary/20">
+                                                            <Badge className="bg-primary/10 text-primary border-primary/20 text-xs">
                                                                 {category.name}
                                                             </Badge>
                                                         </div>
 
-                                                        <h3 className="text-xl font-bold text-neutral-900 mb-3">{product.name}</h3>
-                                                        <p className="text-neutral-600 mb-4 text-sm">{product.description}</p>
+                                                        <h3 className="text-lg sm:text-xl font-bold text-neutral-900 mb-2 sm:mb-3">{product.name}</h3>
+                                                        <p className="text-neutral-600 mb-3 sm:mb-4 text-sm">{product.description}</p>
 
-                                                        <div className="space-y-3 mb-6">
+                                                        <div className="space-y-3 mb-4 sm:mb-6">
                                                             <div>
-                                                                <h4 className="text-sm font-semibold text-neutral-700 mb-2">Key Features</h4>
+                                                                <h4 className="text-xs sm:text-sm font-semibold text-neutral-700 mb-2">Key Features</h4>
                                                                 <ul className="space-y-2">
                                                                     {product.features.map((feature, i) => (
                                                                         <li key={i} className="flex items-center text-sm text-neutral-600">
-                                                                            <Check className="w-3 h-3 text-green-500 mr-2" />
-                                                                            {feature}
+                                                                            <Check className="w-3 h-3 text-green-500 mr-2 flex-shrink-0" />
+                                                                            <span className="text-xs sm:text-sm">{feature}</span>
                                                                         </li>
                                                                     ))}
                                                                 </ul>
                                                             </div>
 
-                                                            <div className="grid grid-cols-2 gap-4 pt-3 border-t border-neutral-100">
+                                                            <div className="grid grid-cols-2 gap-3 sm:gap-4 pt-3 border-t border-neutral-100">
                                                                 <div>
                                                                     <div className="text-xs text-neutral-500">Min. Order</div>
                                                                     <div className="text-sm font-semibold">{product.minOrder}</div>
@@ -683,7 +755,7 @@ function ProductCatalogContent() {
 
                                                         <Button
                                                             variant="outline"
-                                                            className="w-full text-primary hover:text-primary hover:bg-primary/5"
+                                                            className="w-full text-primary hover:text-primary hover:bg-primary/5 text-sm sm:text-base"
                                                             onClick={scrollToHomeContact}
                                                         >
                                                             Request Quote
@@ -702,32 +774,32 @@ function ProductCatalogContent() {
             </section>
 
             {/* Fabric & Printing Options */}
-            <section className="py-24 bg-white">
+            <section className="py-16 sm:py-24 bg-white">
                 <div className="container mx-auto px-4">
-                    <div className="grid lg:grid-cols-2 gap-12">
+                    <div className="grid lg:grid-cols-2 gap-8 sm:gap-12">
                         {/* Fabric Options */}
                         <motion.div
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <Badge className="mb-4 bg-blue-50 text-blue-700 border-blue-200">Fabric Options</Badge>
-                            <h3 className="text-3xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+                            <Badge className="mb-4 bg-blue-50 text-blue-700 border-blue-200 text-sm">Fabric Options</Badge>
+                            <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-4 sm:mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
                                 Premium Fabric Selection
                             </h3>
-                            <p className="text-lg text-neutral-600 mb-8">
+                            <p className="text-base sm:text-lg text-neutral-600 mb-6 sm:mb-8">
                                 Choose from our wide range of premium fabrics to match your specific requirements and budget.
                             </p>
 
                             <div className="space-y-4">
                                 {fabricOptions.map((fabric, index) => (
-                                    <div key={index} className="flex items-start p-4 bg-neutral-50 rounded-xl border border-neutral-200/50">
-                                        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-4 border border-neutral-200">
-                                            <Feather className="w-5 h-5 text-primary" />
+                                    <div key={index} className="flex items-start p-3 sm:p-4 bg-neutral-50 rounded-xl border border-neutral-200/50">
+                                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center mr-3 sm:mr-4 border border-neutral-200 flex-shrink-0">
+                                            <Feather className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-neutral-900">{fabric.name}</h4>
-                                            <p className="text-sm text-neutral-600 mt-1">Best for: {fabric.bestFor}</p>
+                                            <h4 className="font-bold text-neutral-900 text-sm sm:text-base">{fabric.name}</h4>
+                                            <p className="text-xs sm:text-sm text-neutral-600 mt-1">Best for: {fabric.bestFor}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -740,23 +812,23 @@ function ProductCatalogContent() {
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
-                            <Badge className="mb-4 bg-green-50 text-green-700 border-green-200">Printing Techniques</Badge>
-                            <h3 className="text-3xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+                            <Badge className="mb-4 bg-green-50 text-green-700 border-green-200 text-sm">Printing Techniques</Badge>
+                            <h3 className="text-2xl sm:text-3xl font-bold text-neutral-900 mb-4 sm:mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
                                 Customization Options
                             </h3>
-                            <p className="text-lg text-neutral-600 mb-8">
+                            <p className="text-base sm:text-lg text-neutral-600 mb-6 sm:mb-8">
                                 Multiple printing techniques available to bring your designs to life with precision and quality.
                             </p>
 
                             <div className="space-y-4">
                                 {printingTechniques.map((technique, index) => (
-                                    <div key={index} className="flex items-start p-4 bg-neutral-50 rounded-xl border border-neutral-200/50">
-                                        <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-4 border border-neutral-200">
-                                            <Layers className="w-5 h-5 text-accent" />
+                                    <div key={index} className="flex items-start p-3 sm:p-4 bg-neutral-50 rounded-xl border border-neutral-200/50">
+                                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-white rounded-lg flex items-center justify-center mr-3 sm:mr-4 border border-neutral-200 flex-shrink-0">
+                                            <Layers className="w-4 h-4 sm:w-5 sm:h-5 text-accent" />
                                         </div>
                                         <div>
-                                            <h4 className="font-bold text-neutral-900">{technique.name}</h4>
-                                            <p className="text-sm text-neutral-600 mt-1">Best for: {technique.bestFor}</p>
+                                            <h4 className="font-bold text-neutral-900 text-sm sm:text-base">{technique.name}</h4>
+                                            <p className="text-xs sm:text-sm text-neutral-600 mt-1">Best for: {technique.bestFor}</p>
                                         </div>
                                     </div>
                                 ))}
@@ -767,24 +839,24 @@ function ProductCatalogContent() {
             </section>
 
             {/* Bulk Order Process */}
-            <section className="py-24 bg-gradient-to-b from-neutral-50/50 to-white">
+            <section className="py-16 sm:py-24 bg-gradient-to-b from-neutral-50/50 to-white">
                 <div className="container mx-auto px-4">
                     <motion.div
-                        className="text-center max-w-3xl mx-auto mb-16"
+                        className="text-center max-w-3xl mx-auto mb-12 sm:mb-16"
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Bulk Order Process</Badge>
-                        <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+                        <Badge className="mb-4 bg-primary/10 text-primary border-primary/20 text-sm">Bulk Order Process</Badge>
+                        <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-4 sm:mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
                             How Bulk Orders Work
                         </h2>
-                        <p className="text-lg text-neutral-600">
+                        <p className="text-base sm:text-lg text-neutral-600">
                             A streamlined process designed for efficient bulk manufacturing and timely delivery.
                         </p>
                     </motion.div>
 
-                    <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-8 max-w-6xl mx-auto">
                         {[
                             {
                                 step: "01",
@@ -819,11 +891,11 @@ function ProductCatalogContent() {
                                 transition={{ delay: index * 0.1 }}
                                 className="text-center"
                             >
-                                <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/90 text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                                <div className="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-primary to-primary/90 text-white rounded-2xl flex items-center justify-center text-lg sm:text-2xl font-bold mx-auto mb-3 sm:mb-4">
                                     {step.step}
                                 </div>
-                                <h4 className="font-bold text-lg mb-2">{step.title}</h4>
-                                <p className="text-sm text-neutral-600">{step.desc}</p>
+                                <h4 className="font-bold text-sm sm:text-lg mb-1 sm:mb-2 px-2">{step.title}</h4>
+                                <p className="text-xs sm:text-sm text-neutral-600 px-1">{step.desc}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -831,24 +903,24 @@ function ProductCatalogContent() {
             </section>
 
             {/* CTA Section */}
-            <section className="py-24 bg-gradient-to-r from-primary to-primary/90 text-white">
+            <section className="py-16 sm:py-24 bg-gradient-to-r from-primary to-primary/90 text-white">
                 <div className="container mx-auto px-4 text-center">
                     <motion.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-4xl font-bold mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+                        <h2 className="text-3xl sm:text-4xl font-bold mb-4 sm:mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
                             Ready to Place Your Bulk Order?
                         </h2>
-                        <p className="text-white/80 mb-8 max-w-2xl mx-auto text-lg">
+                        <p className="text-white/80 mb-6 sm:mb-8 max-w-2xl mx-auto text-base sm:text-lg">
                             Get a custom quote for any product from our catalog. Our team will provide you with
                             competitive pricing and detailed specifications.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                             <Button
                                 size="lg"
-                                className="bg-white text-primary hover:bg-neutral-100 px-8 py-6 text-lg"
+                                className="bg-white text-primary hover:bg-neutral-100 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg w-full sm:w-auto"
                                 onClick={scrollToHomeContact}
                             >
                                 <FileText className="w-5 h-5 mr-2" />
@@ -857,7 +929,7 @@ function ProductCatalogContent() {
                             <Button
                                 size="lg"
                                 variant="outline"
-                                className="border-white text-primary px-8 py-6 text-lg"
+                                className="border-white text-white hover:bg-white/10 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg w-full sm:w-auto"
                                 onClick={() => window.open(whatsappUrl, '_blank')}
                             >
                                 <MessageCircle className="w-5 h-5 mr-2" />
@@ -869,20 +941,20 @@ function ProductCatalogContent() {
             </section>
 
             {/* Footer */}
-            <footer className="bg-gradient-to-b from-neutral-800 to-neutral-900 text-white py-16">
+            <footer className="bg-gradient-to-b from-neutral-800 to-neutral-900 text-white py-12 sm:py-16">
                 <div className="container mx-auto px-4">
-                    <div className="grid md:grid-cols-3 gap-12 mb-12">
+                    <div className="grid md:grid-cols-3 gap-8 sm:gap-12 mb-8 sm:mb-12">
                         <div>
-                            <div className="flex items-center space-x-3 mb-6">
-                                <div className="w-12 h-12 flex items-center justify-center overflow-hidden">
+                            <div className="flex items-center space-x-3 mb-4 sm:mb-6">
+                                <div className="w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center overflow-hidden flex-shrink-0">
                                     <img
                                         src="/rekha_logo.jpg"
                                         alt="Rekha Logo"
-                                        className="w-8 h-8 object-contain"
+                                        className="w-6 h-6 sm:w-8 sm:h-8 object-contain"
                                     />
                                 </div>
                                 <div>
-                                    <span className="font-bold text-xl block" style={{ fontFamily: BRAND.fonts.heading }}>Rekha Garments</span>
+                                    <span className="font-bold text-lg sm:text-xl block" style={{ fontFamily: BRAND.fonts.heading }}>Rekha Garments</span>
                                     <span className="text-xs text-neutral-400">Complete Apparel Solutions</span>
                                 </div>
                             </div>
@@ -893,8 +965,8 @@ function ProductCatalogContent() {
                         </div>
 
                         <div>
-                            <h4 className="font-bold mb-6 text-lg" style={{ fontFamily: BRAND.fonts.heading }}>Product Categories</h4>
-                            <div className="space-y-3">
+                            <h4 className="font-bold mb-4 sm:mb-6 text-base sm:text-lg" style={{ fontFamily: BRAND.fonts.heading }}>Product Categories</h4>
+                            <div className="space-y-2 sm:space-y-3">
                                 {productCategories.map((category, i) => (
                                     <button
                                         key={i}
@@ -902,7 +974,7 @@ function ProductCatalogContent() {
                                             setActiveTab(category.id);
                                             window.location.href = `#${category.id}`;
                                         }}
-                                        className="block text-neutral-400 hover:text-white transition-colors text-sm hover:translate-x-1"
+                                        className="block text-neutral-400 hover:text-white transition-colors text-sm hover:translate-x-1 text-left"
                                     >
                                         {category.name}
                                     </button>
@@ -911,26 +983,26 @@ function ProductCatalogContent() {
                         </div>
 
                         <div>
-                            <h4 className="font-bold mb-6 text-lg" style={{ fontFamily: BRAND.fonts.heading }}>Contact Sales</h4>
-                            <div className="space-y-3">
+                            <h4 className="font-bold mb-4 sm:mb-6 text-base sm:text-lg" style={{ fontFamily: BRAND.fonts.heading }}>Contact Sales</h4>
+                            <div className="space-y-2 sm:space-y-3">
                                 <div className="flex items-center text-neutral-400">
-                                    <Phone className="w-4 h-4 mr-2" />
-                                    <span>+91 79424 52200</span>
+                                    <Phone className="w-4 h-4 mr-2 flex-shrink-0" />
+                                    <span className="text-sm">+91 79424 52200</span>
                                 </div>
                                 <div className="flex items-center text-neutral-400">
-                                    <Mail className="w-4 h-4 mr-2" />
-                                    <span>sales@rekhagarments.com</span>
+                                    <Mail className="w-4 h-4 mr-2 flex-shrink-0" />
+                                    <span className="text-sm">sales@rekhagarments.com</span>
                                 </div>
                                 <div className="flex items-center text-neutral-400">
-                                    <MapPin className="w-4 h-4 mr-2" />
+                                    <MapPin className="w-4 h-4 mr-2 flex-shrink-0" />
                                     <span className="text-sm">Plot No. 27, GIDC Estate, Vadodara</span>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div className="border-t border-neutral-700/50 pt-8 text-center">
-                        <p className="text-neutral-400 text-sm">
+                    <div className="border-t border-neutral-700/50 pt-6 sm:pt-8 text-center">
+                        <p className="text-neutral-400 text-xs sm:text-sm">
                             &copy; 2024 Rekha Garments. All rights reserved. | Comprehensive Apparel Manufacturing Specialists
                         </p>
                     </div>
@@ -954,3 +1026,960 @@ export default function ProductCatalogPage() {
         </Suspense>
     );
 }
+
+// 'use client';
+
+// import { useState, useEffect, useRef, Suspense } from 'react';
+// import { motion, useInView } from 'framer-motion';
+// import { Button } from '@/components/ui/button';
+// import { Card, CardContent } from '@/components/ui/card';
+// import { Badge } from '@/components/ui/badge';
+// import { Input } from '@/components/ui/input';
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+// import { useSearchParams } from 'next/navigation';
+// import dynamic from 'next/dynamic';
+
+// // Dynamically import CountUp to avoid SSR issues
+// const CountUp = dynamic(() => import('react-countup'), { ssr: false });
+
+// import {
+//     ShoppingBag, Shirt, Package, Check, ArrowRight, ChevronRight,
+//     Users, Briefcase, Target, Palette, Scissors, Factory, Layers,
+//     Feather, Truck as TruckIcon, Star, Award, Clock, Shield,
+//     MapPin, Phone, Mail, MessageCircle, Quote, TrendingUp,
+//     Building, Users as UsersIcon, Ruler, Heart, Sparkles, Gift,
+//     GraduationCap, School, Target as TargetIcon, Calendar,
+//     ShoppingBag as ShoppingBagIcon, Star as StarIcon, FileText,
+//     Zap, CheckCircle, Heart as HeartIcon, Compass, Image as ImageIcon
+// } from 'lucide-react';
+
+// // ============================================
+// // BRAND SYSTEM (Matching Landing Page)
+// // ============================================
+// const BRAND = {
+//     colors: {
+//         primary: '#1a365d',
+//         accent: '#c2410c',
+//         neutral: {
+//             50: '#f8fafc',
+//             100: '#f1f5f9',
+//             200: '#e2e8f0',
+//             300: '#cbd5e1',
+//             400: '#94a3b8',
+//             500: '#64748b',
+//             600: '#475569',
+//             700: '#334155',
+//             800: '#1e293b',
+//             900: '#0f172a',
+//         }
+//     },
+//     fonts: {
+//         heading: '"Playfair Display", serif',
+//         body: '"Inter", sans-serif',
+//     }
+// };
+
+// function ProductCatalogContent() {
+//     const [isScrolled, setIsScrolled] = useState(false);
+//     const [activeTab, setActiveTab] = useState('all');
+//     const [activeGalleryFilter, setActiveGalleryFilter] = useState('All');
+//     const statsRef = useRef(null);
+//     const isStatsInView = useInView(statsRef, { once: true, margin: "-100px" });
+
+//     const whatsappMessage = "Hello! I'm interested in your product catalog and would like to request a quote."
+//     const whatsappUrl = `https://wa.me/919426323279?text=${encodeURIComponent(whatsappMessage)}`
+
+//     const searchParams = useSearchParams();
+
+//     useEffect(() => {
+//         const handleScroll = () => {
+//             setIsScrolled(window.scrollY > 20);
+//         };
+//         window.addEventListener('scroll', handleScroll);
+
+//         // Check for tab param
+//         const tabParam = searchParams.get('tab');
+//         if (tabParam) {
+//             setActiveTab(tabParam);
+//             // Scroll to catalog section if needed, or just let page load
+//             const catalogSection = document.getElementById('catalog-section');
+//             if (catalogSection) {
+//                 catalogSection.scrollIntoView({ behavior: 'smooth' });
+//             }
+//         }
+
+//         return () => window.removeEventListener('scroll', handleScroll);
+//     }, [searchParams]);
+
+//     const scrollToHomeContact = () => {
+//         window.location.href = '/#contact';
+//     };
+
+//     const scrollToTop = () => {
+//         window.scrollTo({ top: 0, behavior: 'smooth' });
+//     };
+
+//     // Product Categories
+//     const productCategories = [
+//         {
+//             id: 't-shirts',
+//             name: 'T-Shirts & Basics',
+//             icon: Shirt,
+//             description: 'Essential apparel for everyday wear and branding',
+//             color: 'from-blue-500/5 to-blue-600/10',
+//             products: [
+//                 {
+//                     name: 'Plain T-Shirts',
+//                     description: 'Basic tees in various colors and fabrics',
+//                     features: ['Multiple Colors', 'Premium Cotton', 'Poly-Cotton Blends', 'Custom Sizing'],
+//                     minOrder: '100 pieces',
+//                     leadTime: '7-10 days',
+//                     icon: Shirt
+//                 },
+//                 {
+//                     name: 'Round Neck T-Shirts',
+//                     description: 'Classic crew-neck style for comfort and style',
+//                     features: ['Traditional Fit', 'Regular & Oversized', 'Year-Round Wear', 'Logo Placement'],
+//                     minOrder: '100 pieces',
+//                     leadTime: '7-10 days',
+//                     icon: ShoppingBag
+//                 },
+//                 {
+//                     name: 'Polo T-Shirts',
+//                     description: 'Collared shirts suitable for casual and semi-formal wear',
+//                     features: ['Button Collar', 'Professional Look', 'Multiple Colors', 'Embroidery Ready'],
+//                     minOrder: '100 pieces',
+//                     leadTime: '10-14 days',
+//                     icon: Briefcase
+//                 },
+//                 {
+//                     name: 'Sports T-Shirts',
+//                     description: 'Athletic and casual sportswear shirts',
+//                     features: ['Moisture-Wicking', 'Quick Dry Fabrics', 'Active Wear', 'Team Sports'],
+//                     minOrder: '50 pieces',
+//                     leadTime: '10-14 days',
+//                     icon: Target
+//                 }
+//             ]
+//         },
+//         {
+//             id: 'custom-printed',
+//             name: 'Custom Printed Apparel',
+//             icon: Layers,
+//             description: 'Branded and customized garments for events and organizations',
+//             color: 'from-green-500/5 to-green-600/10',
+//             products: [
+//                 {
+//                     name: 'Custom Printed T-Shirts',
+//                     description: 'For events, companies, teams, and promotions',
+//                     features: ['Screen Printing', 'DTG Printing', 'Sublimation', 'Full Color Prints'],
+//                     minOrder: '50 pieces',
+//                     leadTime: '10-14 days',
+//                     icon: Layers
+//                 },
+//                 {
+//                     name: 'Corporate/Company T-Shirts',
+//                     description: 'Customized for business groups and organizations',
+//                     features: ['Logo Printing', 'Brand Colors', 'Employee Sizing', 'Bulk Discounts'],
+//                     minOrder: '100 pieces',
+//                     leadTime: '12-16 days',
+//                     icon: Building
+//                 },
+//                 {
+//                     name: 'Ganpati/Ganesh T-Shirts',
+//                     description: 'Festive themed print shirts for celebrations',
+//                     features: ['Festive Designs', 'Vibrant Colors', 'Cultural Themes', 'Seasonal Collections'],
+//                     minOrder: '50 pieces',
+//                     leadTime: '7-10 days',
+//                     icon: Gift
+//                 }
+//             ]
+//         },
+//         {
+//             id: 'uniforms',
+//             name: 'Uniform Solutions',
+//             icon: UsersIcon,
+//             description: 'Complete uniform programs for organizations and institutions',
+//             color: 'from-primary/5 to-primary/10',
+//             products: [
+//                 {
+//                     name: 'Corporate/Company Uniforms',
+//                     description: 'Custom T-shirts and apparel for company staff',
+//                     features: ['Standardized Design', 'Brand Consistency', 'Multi-Size Kits', 'Professional Look'],
+//                     minOrder: '100 pieces',
+//                     leadTime: '14-21 days',
+//                     icon: Briefcase
+//                 },
+//                 {
+//                     name: 'Custom Staff Uniforms',
+//                     description: 'General customized uniforms for teams and organizations',
+//                     features: ['Team Branding', 'Role-Specific Designs', 'Durability Focus', 'Wear Testing'],
+//                     minOrder: '50 pieces',
+//                     leadTime: '12-18 days',
+//                     icon: Users
+//                 },
+//                 {
+//                     name: 'School Uniforms',
+//                     description: 'School-style T-shirts and uniform garments for bulk orders',
+//                     features: ['Age-Appropriate Sizing', 'Durable Fabrics', 'School Colors', 'Growth Allowance'],
+//                     minOrder: '200 pieces',
+//                     leadTime: '15-25 days',
+//                     icon: GraduationCap
+//                 }
+//             ]
+//         },
+//         {
+//             id: 'festive',
+//             name: 'Festive & Seasonal',
+//             icon: Sparkles,
+//             description: 'Special occasion and festival-specific apparel',
+//             color: 'from-orange-500/5 to-orange-600/10',
+//             products: [
+//                 {
+//                     name: 'Festival Clothing',
+//                     description: 'Seasonal collections for cultural celebrations',
+//                     features: ['Festival Themes', 'Traditional Motifs', 'Group Matching Sets', 'Vibrant Colors'],
+//                     minOrder: '50 pieces',
+//                     leadTime: '10-15 days',
+//                     icon: Sparkles
+//                 },
+//                 {
+//                     name: 'Seasonal Collections',
+//                     description: 'Themed apparel for various occasions throughout the year',
+//                     features: ['Holiday Designs', 'Event-Specific', 'Limited Editions', 'Quick Turnaround'],
+//                     minOrder: '30 pieces',
+//                     leadTime: '8-12 days',
+//                     icon: Calendar
+//                 }
+//             ]
+//         },
+//         {
+//             id: 'accessories',
+//             name: 'Accessories & Bottoms',
+//             icon: Package,
+//             description: 'Complementary garments and accessories',
+//             color: 'from-purple-500/5 to-purple-600/10',
+//             products: [
+//                 {
+//                     name: 'Track Pants & Pants',
+//                     description: 'Trousers offered alongside tops for complete sets',
+//                     features: ['Elastic Waist', 'Drawstring Options', 'Multiple Fabrics', 'Matching Sets'],
+//                     minOrder: '100 pieces',
+//                     leadTime: '12-18 days',
+//                     icon: Package
+//                 },
+//                 {
+//                     name: 'Professional Wear',
+//                     description: 'Aprons, doctor coats, and specialized workwear',
+//                     features: ['Functional Design', 'Durable Materials', 'Professional Finish', 'Custom Sizing'],
+//                     minOrder: '50 pieces',
+//                     leadTime: '14-21 days',
+//                     icon: Shield
+//                 }
+//             ]
+//         }
+//     ];
+
+//     // All Products Flattened for "All Products" View
+//     const allProducts = productCategories.flatMap(category =>
+//         category.products.map(product => ({
+//             ...product,
+//             category: category.name,
+//             categoryId: category.id,
+//             categoryColor: category.color,
+//             categoryIcon: category.icon
+//         }))
+//     );
+
+//     const fabricOptions = [
+//         { name: 'Premium Cotton', bestFor: 'Comfort, daily wear, branding' },
+//         { name: 'Poly-Cotton Blend', bestFor: 'Durability, vibrant prints, maintenance' },
+//         { name: 'Combed Cotton', bestFor: 'Softness, premium feel' },
+//         { name: 'DRIFIT/Performance', bestFor: 'Sports, active wear, moisture management' },
+//         { name: 'Organic Cotton', bestFor: 'Eco-friendly, sensitive skin' },
+//         { name: 'Heavyweight Cotton', bestFor: 'Durability, cold weather' }
+//     ];
+
+//     const printingTechniques = [
+//         { name: 'Screen Printing', bestFor: 'Bulk orders, simple designs, cost-effective' },
+//         { name: 'Digital Printing (DTG)', bestFor: 'Complex designs, small batches, photo prints' },
+//         { name: 'Sublimation Printing', bestFor: 'All-over prints, polyester fabrics' },
+//         { name: 'Embroidery', bestFor: 'Premium look, corporate logos, durability' },
+//         { name: 'Heat Transfer', bestFor: 'Small batches, quick turnaround' }
+//     ];
+
+//     // Gallery Images
+//     const galleryImages = [
+//         { src: '/black_track.jpeg', category: 'Tracks', name: 'Black Track' },
+//         { src: '/blue_track.jpeg', category: 'Tracks', name: 'Blue Track' },
+//         { src: '/blue.jpeg', category: 'School Uniform', name: 'Blue Uniform' },
+//         { src: '/dark_blue.jpeg', category: 'School Uniform', name: 'Dark Blue Uniform' },
+//         { src: '/light_red.jpeg', category: 'School Uniform', name: 'Light Red Uniform' },
+//         { src: '/mix.jpeg', category: 'School Uniform', name: 'Mix Uniform' },
+//         { src: '/orange.jpeg', category: 'School Uniform', name: 'Orange Uniform' },
+//         { src: '/red.jpeg', category: 'School Uniform', name: 'Red Uniform' },
+//         { src: '/airforce_blue_polo.webp', category: 'Polo Tshirts', name: 'Blue Polo Tshirts' },
+//         { src: '/artic_blue_polo.webp', category: 'Polo Tshirts', name: 'Artic Polo Tshirts' },
+//         { src: '/basil_green_polo.webp', category: 'Polo Tshirts', name: 'Green Polo Tshirts' },
+//         { src: '/black_coffee_polo.webp', category: 'Polo Tshirts', name: 'Black Coffee Polo Tshirts' },
+//         { src: '/black_polo.jpeg', category: 'Polo Tshirts', name: 'Black Polo Tshirts' },
+//         { src: '/deep_teal_polo.jpg', category: 'Polo Tshirts', name: 'Deep Teal Polo Tshirts' },
+//         { src: '/divine_maroon.webp', category: 'Polo Tshirts', name: 'Divine Maroon Polo Tshirts' },
+//         { src: '/exotic_olive_polo.webp', category: 'Polo Tshirts', name: 'Exotic Olive Polo Tshirts' },
+//         { src: '/gunmetal_grey_polo.webp', category: 'Polo Tshirts', name: 'Gunmetal Grey Polo Tshirts' },
+//         { src: '/midnight_navy_polo.webp', category: 'Polo Tshirts', name: 'Midnight Navy Polo Tshirts' },
+//         { src: '/mulberry_wine_polo.webp', category: 'Polo Tshirts', name: 'Mulberry Wine Polo Tshirts' },
+//         { src: '/natural_rust_polo.webp', category: 'Polo Tshirts', name: 'Natural Rust Polo Tshirts' },
+//         { src: '/peach_fuzz_polo.webp', category: 'Polo Tshirts', name: 'Peach Fuzz Polo Tshirts' },
+//         { src: '/pink.webp', category: 'Polo Tshirts', name: 'Pink Polo Tshirts' },
+//         { src: '/pistachio_polo.webp', category: 'Polo Tshirts', name: 'Pistachio Polo Tshirts' },
+//         { src: '/sand_beige_polo.webp', category: 'Polo Tshirts', name: 'Sand Beige Polo Tshirts' },
+//         { src: '/sunset_tello_polo.webp', category: 'Polo Tshirts', name: 'Sunset Tello Polo Tshirts' },
+//         { src: '/thunder_grey_polo.jpg', category: 'Polo Tshirts', name: 'Thunder Grey Polo Tshirts' },
+//         { src: '/white_polo.webp', category: 'Polo Tshirts', name: 'White Polo Tshirts' },
+//         { src: '/white_round_neck.webp', category: 'Round Neck Tshirts', name: 'White Round Neck Tshirts' },
+//         { src: 'black_round_neck.gif', category: 'Round Neck Tshirts', name: 'Black Round Neck Tshirts' },
+//         { src: 'blue_round_neck.jpg', category: 'Round Neck Tshirts', name: 'Blue Round Neck Tshirts' },
+//         { src: 'red_round_neck.jpg', category: 'Round Neck Tshirts', name: 'Red Round Neck Tshirts' },
+//         { src: 'yellow_round_neck.jpg', category: 'Round Neck Tshirts', name: 'Yellow Round Neck Tshirts' },
+//         { src: 'ceil_round_neck.jpg', category: 'Round Neck Tshirts', name: 'Ceil Round Neck Tshirts' },
+//     ];
+
+//     return (
+//         <div className="min-h-screen bg-white text-gray-900 selection:bg-primary/20 selection:text-primary overflow-x-hidden" style={{ fontFamily: BRAND.fonts.body }}>
+//             {/* Hero Section */}
+//             <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary/5 pt-20">
+//                 <div className="absolute inset-0">
+//                     <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float"></div>
+//                     <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
+//                     <div className="absolute top-1/3 right-1/3 w-64 h-64 bg-primary/3 rounded-full blur-3xl animate-float" style={{ animationDelay: '3s' }}></div>
+//                 </div>
+
+//                 <div className="container mx-auto px-4 relative z-10">
+//                     <motion.div
+//                         className="max-w-6xl mx-auto text-center"
+//                         initial={{ opacity: 0, y: 20 }}
+//                         animate={{ opacity: 1, y: 0 }}
+//                         transition={{ duration: 0.8 }}
+//                     >
+//                         <motion.div className="mb-8 mt-16">
+//                             <Badge className="bg-white/80 backdrop-blur-sm border-neutral-200/50 text-neutral-800 hover:bg-white px-4 py-1.5 shadow-sm mb-4">
+//                                 <Award className="w-3.5 h-3.5 fill-accent text-accent mr-2" />
+//                                 <span className="font-medium tracking-wide">Complete Manufacturing Portfolio • 50+ Product Variants</span>
+//                             </Badge>
+//                             <div className="flex items-center justify-center space-x-2 text-sm text-neutral-600">
+//                                 <Factory className="w-4 h-4" />
+//                                 <span>Vadodara-based manufacturing since 2004 • Bulk orders available</span>
+//                             </div>
+//                         </motion.div>
+
+//                         <motion.h1
+//                             className="mb-8 leading-[1.1] tracking-tight"
+//                             style={{ fontFamily: BRAND.fonts.heading }}
+//                         >
+//                             <span className="block text-4xl md:text-6xl lg:text-7xl font-bold text-neutral-900">
+//                                 Complete Product Catalog
+//                             </span>
+//                             <span className="block text-3xl md:text-5xl lg:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-accent">
+//                                 Your Comprehensive Apparel Solution
+//                             </span>
+//                         </motion.h1>
+
+//                         <motion.p className="text-xl md:text-2xl text-neutral-600 mb-10 max-w-3xl mx-auto leading-relaxed">
+//                             From basic T-shirts to complete uniform programs. Explore our comprehensive range of
+//                             apparel manufacturing solutions for corporate, educational, and festive needs.
+//                         </motion.p>
+
+//                         <motion.div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+//                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+//                                 <Button
+//                                     size="lg"
+//                                     className="bg-gradient-to-r from-primary to-primary/90 hover:from-primary hover:to-primary/80 text-white px-8 py-6 text-lg h-auto rounded-xl shadow-xl shadow-primary/20 hover:shadow-2xl transition-all group"
+//                                     onClick={scrollToHomeContact}
+//                                 >
+//                                     <span className="flex items-center">
+//                                         <FileText className="w-5 h-5 mr-2" />
+//                                         Order Now
+//                                         <ChevronRight className="w-5 h-5 ml-2 transform transition-transform group-hover:translate-x-1" />
+//                                     </span>
+//                                 </Button>
+//                             </motion.div>
+
+//                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+//                                 <Button
+//                                     variant="outline"
+//                                     size="lg"
+//                                     className="bg-white/80 backdrop-blur-sm border-neutral-200/50 text-neutral-700 px-8 py-6 text-lg h-auto rounded-xl"
+//                                     onClick={() => window.open(whatsappUrl, '_blank')}
+//                                 >
+//                                     <span className="flex items-center">
+//                                         <MessageCircle className="w-5 h-5 mr-2 text-green-600" />
+//                                         WhatsApp for Bulk Pricing
+//                                     </span>
+//                                 </Button>
+//                             </motion.div>
+//                         </motion.div>
+
+//                         {/* Stats */}
+//                         <motion.div
+//                             ref={statsRef}
+//                             className="grid grid-cols-2 md:grid-cols-4 gap-6 border-t border-neutral-200/50 pt-8"
+//                         >
+//                             {[
+//                                 { value: 50, label: "Product Variants", suffix: "+" },
+//                                 { value: 3800000, label: "Annual Capacity", suffix: "+ units" },
+//                                 { value: 98.7, label: "Quality Rating", suffix: "%" },
+//                                 { value: 21, label: "Years Experience", suffix: "+" },
+//                             ].map((stat, i) => (
+//                                 <div key={i} className="text-center p-4 rounded-xl bg-white/50 backdrop-blur-sm border border-neutral-200/30">
+//                                     <div className="font-bold text-3xl text-primary mb-1" style={{ fontFamily: BRAND.fonts.heading }}>
+//                                         {isStatsInView ? (
+//                                             <CountUp
+//                                                 end={stat.value}
+//                                                 suffix={stat.suffix}
+//                                                 duration={2}
+//                                                 separator=","
+//                                                 decimals={stat.value % 1 !== 0 ? 1 : 0}
+//                                             />
+//                                         ) : (
+//                                             '0' + (stat.suffix || '')
+//                                         )}
+//                                     </div>
+//                                     <div className="text-sm font-medium text-neutral-500 uppercase tracking-wide">{stat.label}</div>
+//                                 </div>
+//                             ))}
+//                         </motion.div>
+//                     </motion.div>
+//                 </div>
+//             </section>
+
+//             {/* Product Categories Tabs */}
+//             <section id="catalog-section" className="py-24 bg-gradient-to-b from-white to-neutral-50/50">
+//                 <div className="container mx-auto px-4">
+//                     <motion.div
+//                         className="text-center max-w-3xl mx-auto mb-16"
+//                         initial={{ opacity: 0, y: 30 }}
+//                         whileInView={{ opacity: 1, y: 0 }}
+//                         viewport={{ once: true }}
+//                     >
+//                         <Badge className="mb-4 bg-white text-neutral-800 border-neutral-200/50 shadow-sm">Browse by Category</Badge>
+//                         <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+//                             Complete Product Range
+//                         </h2>
+//                         <p className="text-lg text-neutral-600">
+//                             Explore our comprehensive manufacturing capabilities across all apparel categories.
+//                         </p>
+//                     </motion.div>
+
+//                     {/* Category Tabs */}
+//                     <Tabs value={activeTab} className="max-w-7xl mx-auto" onValueChange={setActiveTab}>
+//                         <div className="flex justify-center mb-16">
+//                             <TabsList className="flex flex-wrap justify-center gap-2 bg-neutral-100/50 p-1 rounded-xl h-auto w-full">
+//                                 <TabsTrigger value="all" className="data-[state=active]:bg-white">
+//                                     <ShoppingBag className="w-4 h-4 mr-2" />
+//                                     All Products
+//                                 </TabsTrigger>
+//                                 <TabsTrigger value="gallery" className="data-[state=active]:bg-white">
+//                                     <ImageIcon className="w-4 h-4 mr-2" />
+//                                     Our Gallery
+//                                 </TabsTrigger>
+//                                 <TabsTrigger value="t-shirts" className="data-[state=active]:bg-white">
+//                                     <Shirt className="w-4 h-4 mr-2" />
+//                                     T-Shirts
+//                                 </TabsTrigger>
+//                                 <TabsTrigger value="custom-printed" className="data-[state=active]:bg-white">
+//                                     <Layers className="w-4 h-4 mr-2" />
+//                                     Custom Print
+//                                 </TabsTrigger>
+//                                 <TabsTrigger value="uniforms" className="data-[state=active]:bg-white">
+//                                     <UsersIcon className="w-4 h-4 mr-2" />
+//                                     Uniforms
+//                                 </TabsTrigger>
+//                                 <TabsTrigger value="festive" className="data-[state=active]:bg-white">
+//                                     <Sparkles className="w-4 h-4 mr-2" />
+//                                     Seasonal
+//                                 </TabsTrigger>
+//                                 <TabsTrigger value="accessories" className="data-[state=active]:bg-white">
+//                                     <Package className="w-4 h-4 mr-2" />
+//                                     Accessories
+//                                 </TabsTrigger>
+//                             </TabsList>
+//                         </div>
+
+//                         {/* All Products Tab */}
+//                         <TabsContent value="all" className="mt-0">
+//                             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+//                                 {allProducts.map((product, index) => (
+//                                     <motion.div
+//                                         key={`${product.categoryId}-${index}`}
+//                                         initial={{ opacity: 0, y: 20 }}
+//                                         whileInView={{ opacity: 1, y: 0 }}
+//                                         viewport={{ once: true }}
+//                                         transition={{ delay: index * 0.05 }}
+//                                     >
+//                                         <Card className="h-full hover:shadow-xl transition-all duration-300 border border-neutral-200/50 hover:border-primary/30">
+//                                             <CardContent className="p-6">
+//                                                 <div className="flex items-start justify-between mb-4">
+//                                                     <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${product.categoryColor} flex items-center justify-center`}>
+//                                                         <product.icon className="w-6 h-6 text-primary" />
+//                                                     </div>
+//                                                     <Badge className="bg-primary/10 text-primary border-primary/20">
+//                                                         {product.category}
+//                                                     </Badge>
+//                                                 </div>
+
+//                                                 <h3 className="text-xl font-bold text-neutral-900 mb-3">{product.name}</h3>
+//                                                 <p className="text-neutral-600 mb-4 text-sm">{product.description}</p>
+
+//                                                 <div className="space-y-3 mb-6">
+//                                                     <div>
+//                                                         <h4 className="text-sm font-semibold text-neutral-700 mb-2">Key Features</h4>
+//                                                         <div className="flex flex-wrap gap-2">
+//                                                             {product.features.map((feature, i) => (
+//                                                                 <span key={i} className="text-xs bg-neutral-100 text-neutral-700 px-2 py-1 rounded">
+//                                                                     {feature}
+//                                                                 </span>
+//                                                             ))}
+//                                                         </div>
+//                                                     </div>
+
+//                                                     <div className="grid grid-cols-2 gap-4 pt-3 border-t border-neutral-100">
+//                                                         <div>
+//                                                             <div className="text-xs text-neutral-500">Min. Order</div>
+//                                                             <div className="text-sm font-semibold">{product.minOrder}</div>
+//                                                         </div>
+//                                                         <div>
+//                                                             <div className="text-xs text-neutral-500">Lead Time</div>
+//                                                             <div className="text-sm font-semibold">{product.leadTime}</div>
+//                                                         </div>
+//                                                     </div>
+//                                                 </div>
+
+//                                                 <Button
+//                                                     variant="outline"
+//                                                     className="w-full text-primary hover:text-primary hover:bg-primary/5"
+//                                                     onClick={scrollToHomeContact}
+//                                                 >
+//                                                     Request Quote
+//                                                     <ArrowRight className="w-4 h-4 ml-2" />
+//                                                 </Button>
+//                                             </CardContent>
+//                                         </Card>
+//                                     </motion.div>
+//                                 ))}
+//                             </div>
+//                         </TabsContent>
+
+//                         {/* Our Gallery Tab */}
+//                         <TabsContent value="gallery" className="mt-0">
+//                             <motion.div
+//                                 initial={{ opacity: 0, y: 20 }}
+//                                 animate={{ opacity: 1, y: 0 }}
+//                                 className="mb-10"
+//                             >
+//                                 <div className="flex items-center gap-4 mb-8">
+//                                     <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-pink-500/5 to-pink-600/10 flex items-center justify-center">
+//                                         <ImageIcon className="w-8 h-8 text-pink-600" />
+//                                     </div>
+//                                     <div>
+//                                         <h3 className="text-3xl font-bold text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
+//                                             Our Gallery
+//                                         </h3>
+//                                         <p className="text-neutral-600">Explore our latest designs and collections.</p>
+//                                     </div>
+//                                 </div>
+
+//                                 {/* Gallery Filter Bar */}
+//                                 <div className="flex justify-center mb-8">
+//                                     <div className="bg-neutral-100/80 p-1 rounded-lg flex space-x-1">
+//                                         {['All', 'Tracks', 'School Uniform', 'Polo Tshirts', 'Round Neck Tshirts'].map((filter) => (
+//                                             <button
+//                                                 key={filter}
+//                                                 onClick={() => setActiveGalleryFilter(filter)}
+//                                                 className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${activeGalleryFilter === filter
+//                                                     ? 'bg-white text-primary shadow-sm'
+//                                                     : 'text-neutral-600 hover:text-neutral-900 hover:bg-white/50'
+//                                                     }`}
+//                                             >
+//                                                 {filter}
+//                                             </button>
+//                                         ))}
+//                                     </div>
+//                                 </div>
+
+//                                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+//                                     {galleryImages
+//                                         .filter(img => activeGalleryFilter === 'All' || img.category === activeGalleryFilter)
+//                                         .map((image, index) => (
+//                                             <motion.div
+//                                                 key={`${image.name}-${index}`}
+//                                                 initial={{ opacity: 0, scale: 0.9 }}
+//                                                 whileInView={{ opacity: 1, scale: 1 }}
+//                                                 viewport={{ once: true }}
+//                                                 transition={{ delay: index * 0.05 }}
+//                                             >
+//                                                 <Card className="h-full hover:shadow-xl transition-all duration-300 border border-neutral-200/50 overflow-hidden group">
+//                                                     <div className="relative aspect-[4/5] overflow-hidden">
+//                                                         <img
+//                                                             src={image.src}
+//                                                             alt={image.name}
+//                                                             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+//                                                         />
+//                                                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+//                                                             <Badge className="bg-white/90 text-neutral-900 backdrop-blur-sm">
+//                                                                 {image.category}
+//                                                             </Badge>
+//                                                         </div>
+//                                                     </div>
+//                                                     <CardContent className="p-4">
+//                                                         <h3 className="font-bold text-neutral-900">{image.name}</h3>
+//                                                         <p className="text-sm text-neutral-500">{image.category}</p>
+//                                                     </CardContent>
+//                                                 </Card>
+//                                             </motion.div>
+//                                         ))}
+//                                 </div>
+//                             </motion.div>
+//                         </TabsContent>
+
+//                         {/* Category-specific Tabs */}
+//                         {productCategories.map((category) => (
+//                             <TabsContent key={category.id} value={category.id} className="mt-0">
+//                                 <motion.div
+//                                     initial={{ opacity: 0, y: 20 }}
+//                                     animate={{ opacity: 1, y: 0 }}
+//                                     className="mb-10"
+//                                 >
+//                                     <div className="flex items-center gap-4 mb-8">
+//                                         <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${category.color} flex items-center justify-center`}>
+//                                             <category.icon className="w-8 h-8 text-primary" />
+//                                         </div>
+//                                         <div>
+//                                             <h3 className="text-3xl font-bold text-neutral-900" style={{ fontFamily: BRAND.fonts.heading }}>
+//                                                 {category.name}
+//                                             </h3>
+//                                             <p className="text-neutral-600">{category.description}</p>
+//                                         </div>
+//                                     </div>
+
+//                                     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+//                                         {category.products.map((product, index) => (
+//                                             <motion.div
+//                                                 key={index}
+//                                                 initial={{ opacity: 0, y: 20 }}
+//                                                 whileInView={{ opacity: 1, y: 0 }}
+//                                                 viewport={{ once: true }}
+//                                                 transition={{ delay: index * 0.1 }}
+//                                             >
+//                                                 <Card className="h-full hover:shadow-xl transition-all duration-300 border border-neutral-200/50">
+//                                                     <CardContent className="p-6">
+//                                                         <div className="flex items-start justify-between mb-4">
+//                                                             <div className={`w-12 h-12 rounded-xl bg-gradient-to-br ${category.color} flex items-center justify-center`}>
+//                                                                 <product.icon className="w-6 h-6 text-primary" />
+//                                                             </div>
+//                                                             <Badge className="bg-primary/10 text-primary border-primary/20">
+//                                                                 {category.name}
+//                                                             </Badge>
+//                                                         </div>
+
+//                                                         <h3 className="text-xl font-bold text-neutral-900 mb-3">{product.name}</h3>
+//                                                         <p className="text-neutral-600 mb-4 text-sm">{product.description}</p>
+
+//                                                         <div className="space-y-3 mb-6">
+//                                                             <div>
+//                                                                 <h4 className="text-sm font-semibold text-neutral-700 mb-2">Key Features</h4>
+//                                                                 <ul className="space-y-2">
+//                                                                     {product.features.map((feature, i) => (
+//                                                                         <li key={i} className="flex items-center text-sm text-neutral-600">
+//                                                                             <Check className="w-3 h-3 text-green-500 mr-2" />
+//                                                                             {feature}
+//                                                                         </li>
+//                                                                     ))}
+//                                                                 </ul>
+//                                                             </div>
+
+//                                                             <div className="grid grid-cols-2 gap-4 pt-3 border-t border-neutral-100">
+//                                                                 <div>
+//                                                                     <div className="text-xs text-neutral-500">Min. Order</div>
+//                                                                     <div className="text-sm font-semibold">{product.minOrder}</div>
+//                                                                 </div>
+//                                                                 <div>
+//                                                                     <div className="text-xs text-neutral-500">Lead Time</div>
+//                                                                     <div className="text-sm font-semibold">{product.leadTime}</div>
+//                                                                 </div>
+//                                                             </div>
+//                                                         </div>
+
+//                                                         <Button
+//                                                             variant="outline"
+//                                                             className="w-full text-primary hover:text-primary hover:bg-primary/5"
+//                                                             onClick={scrollToHomeContact}
+//                                                         >
+//                                                             Request Quote
+//                                                             <ArrowRight className="w-4 h-4 ml-2" />
+//                                                         </Button>
+//                                                     </CardContent>
+//                                                 </Card>
+//                                             </motion.div>
+//                                         ))}
+//                                     </div>
+//                                 </motion.div>
+//                             </TabsContent>
+//                         ))}
+//                     </Tabs>
+//                 </div>
+//             </section>
+
+//             {/* Fabric & Printing Options */}
+//             <section className="py-24 bg-white">
+//                 <div className="container mx-auto px-4">
+//                     <div className="grid lg:grid-cols-2 gap-12">
+//                         {/* Fabric Options */}
+//                         <motion.div
+//                             initial={{ opacity: 0, x: -50 }}
+//                             whileInView={{ opacity: 1, x: 0 }}
+//                             viewport={{ once: true }}
+//                         >
+//                             <Badge className="mb-4 bg-blue-50 text-blue-700 border-blue-200">Fabric Options</Badge>
+//                             <h3 className="text-3xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+//                                 Premium Fabric Selection
+//                             </h3>
+//                             <p className="text-lg text-neutral-600 mb-8">
+//                                 Choose from our wide range of premium fabrics to match your specific requirements and budget.
+//                             </p>
+
+//                             <div className="space-y-4">
+//                                 {fabricOptions.map((fabric, index) => (
+//                                     <div key={index} className="flex items-start p-4 bg-neutral-50 rounded-xl border border-neutral-200/50">
+//                                         <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-4 border border-neutral-200">
+//                                             <Feather className="w-5 h-5 text-primary" />
+//                                         </div>
+//                                         <div>
+//                                             <h4 className="font-bold text-neutral-900">{fabric.name}</h4>
+//                                             <p className="text-sm text-neutral-600 mt-1">Best for: {fabric.bestFor}</p>
+//                                         </div>
+//                                     </div>
+//                                 ))}
+//                             </div>
+//                         </motion.div>
+
+//                         {/* Printing Techniques */}
+//                         <motion.div
+//                             initial={{ opacity: 0, x: 50 }}
+//                             whileInView={{ opacity: 1, x: 0 }}
+//                             viewport={{ once: true }}
+//                         >
+//                             <Badge className="mb-4 bg-green-50 text-green-700 border-green-200">Printing Techniques</Badge>
+//                             <h3 className="text-3xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+//                                 Customization Options
+//                             </h3>
+//                             <p className="text-lg text-neutral-600 mb-8">
+//                                 Multiple printing techniques available to bring your designs to life with precision and quality.
+//                             </p>
+
+//                             <div className="space-y-4">
+//                                 {printingTechniques.map((technique, index) => (
+//                                     <div key={index} className="flex items-start p-4 bg-neutral-50 rounded-xl border border-neutral-200/50">
+//                                         <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center mr-4 border border-neutral-200">
+//                                             <Layers className="w-5 h-5 text-accent" />
+//                                         </div>
+//                                         <div>
+//                                             <h4 className="font-bold text-neutral-900">{technique.name}</h4>
+//                                             <p className="text-sm text-neutral-600 mt-1">Best for: {technique.bestFor}</p>
+//                                         </div>
+//                                     </div>
+//                                 ))}
+//                             </div>
+//                         </motion.div>
+//                     </div>
+//                 </div>
+//             </section>
+
+//             {/* Bulk Order Process */}
+//             <section className="py-24 bg-gradient-to-b from-neutral-50/50 to-white">
+//                 <div className="container mx-auto px-4">
+//                     <motion.div
+//                         className="text-center max-w-3xl mx-auto mb-16"
+//                         initial={{ opacity: 0, y: 30 }}
+//                         whileInView={{ opacity: 1, y: 0 }}
+//                         viewport={{ once: true }}
+//                     >
+//                         <Badge className="mb-4 bg-primary/10 text-primary border-primary/20">Bulk Order Process</Badge>
+//                         <h2 className="text-4xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+//                             How Bulk Orders Work
+//                         </h2>
+//                         <p className="text-lg text-neutral-600">
+//                             A streamlined process designed for efficient bulk manufacturing and timely delivery.
+//                         </p>
+//                     </motion.div>
+
+//                     <div className="grid md:grid-cols-4 gap-8 max-w-6xl mx-auto">
+//                         {[
+//                             {
+//                                 step: "01",
+//                                 title: "Requirement Analysis",
+//                                 desc: "Understand your needs, quantities, and specifications",
+//                                 icon: FileText
+//                             },
+//                             {
+//                                 step: "02",
+//                                 title: "Sample Development",
+//                                 desc: "Create samples for approval with your specifications",
+//                                 icon: Layers
+//                             },
+//                             {
+//                                 step: "03",
+//                                 title: "Bulk Production",
+//                                 desc: "Quality-controlled manufacturing at scale",
+//                                 icon: Factory
+//                             },
+//                             {
+//                                 step: "04",
+//                                 title: "Delivery & Support",
+//                                 desc: "Timely delivery with post-order support",
+//                                 icon: TruckIcon
+//                             }
+//                         ].map((step, index) => (
+//                             <motion.div
+//                                 key={index}
+//                                 initial={{ opacity: 0, y: 30 }}
+//                                 whileInView={{ opacity: 1, y: 0 }}
+//                                 viewport={{ once: true }}
+//                                 transition={{ delay: index * 0.1 }}
+//                                 className="text-center"
+//                             >
+//                                 <div className="w-16 h-16 bg-gradient-to-br from-primary to-primary/90 text-white rounded-2xl flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+//                                     {step.step}
+//                                 </div>
+//                                 <h4 className="font-bold text-lg mb-2">{step.title}</h4>
+//                                 <p className="text-sm text-neutral-600">{step.desc}</p>
+//                             </motion.div>
+//                         ))}
+//                     </div>
+//                 </div>
+//             </section>
+
+//             {/* CTA Section */}
+//             <section className="py-24 bg-gradient-to-r from-primary to-primary/90 text-white">
+//                 <div className="container mx-auto px-4 text-center">
+//                     <motion.div
+//                         initial={{ opacity: 0, y: 30 }}
+//                         whileInView={{ opacity: 1, y: 0 }}
+//                         viewport={{ once: true }}
+//                     >
+//                         <h2 className="text-4xl font-bold mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+//                             Ready to Place Your Bulk Order?
+//                         </h2>
+//                         <p className="text-white/80 mb-8 max-w-2xl mx-auto text-lg">
+//                             Get a custom quote for any product from our catalog. Our team will provide you with
+//                             competitive pricing and detailed specifications.
+//                         </p>
+//                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
+//                             <Button
+//                                 size="lg"
+//                                 className="bg-white text-primary hover:bg-neutral-100 px-8 py-6 text-lg"
+//                                 onClick={scrollToHomeContact}
+//                             >
+//                                 <FileText className="w-5 h-5 mr-2" />
+//                                 Request Complete Catalog & Quote
+//                             </Button>
+//                             <Button
+//                                 size="lg"
+//                                 variant="outline"
+//                                 className="border-white text-primary px-8 py-6 text-lg"
+//                                 onClick={() => window.open(whatsappUrl, '_blank')}
+//                             >
+//                                 <MessageCircle className="w-5 h-5 mr-2" />
+//                                 WhatsApp for Bulk Pricing
+//                             </Button>
+//                         </div>
+//                     </motion.div>
+//                 </div>
+//             </section>
+
+//             {/* Footer */}
+//             <footer className="bg-gradient-to-b from-neutral-800 to-neutral-900 text-white py-16">
+//                 <div className="container mx-auto px-4">
+//                     <div className="grid md:grid-cols-3 gap-12 mb-12">
+//                         <div>
+//                             <div className="flex items-center space-x-3 mb-6">
+//                                 <div className="w-12 h-12 flex items-center justify-center overflow-hidden">
+//                                     <img
+//                                         src="/rekha_logo.jpg"
+//                                         alt="Rekha Logo"
+//                                         className="w-8 h-8 object-contain"
+//                                     />
+//                                 </div>
+//                                 <div>
+//                                     <span className="font-bold text-xl block" style={{ fontFamily: BRAND.fonts.heading }}>Rekha Garments</span>
+//                                     <span className="text-xs text-neutral-400">Complete Apparel Solutions</span>
+//                                 </div>
+//                             </div>
+//                             <p className="text-neutral-400 text-sm leading-relaxed">
+//                                 Your comprehensive apparel manufacturing partner. From basic T-shirts to complete uniform programs,
+//                                 we deliver quality and consistency across all product categories.
+//                             </p>
+//                         </div>
+
+//                         <div>
+//                             <h4 className="font-bold mb-6 text-lg" style={{ fontFamily: BRAND.fonts.heading }}>Product Categories</h4>
+//                             <div className="space-y-3">
+//                                 {productCategories.map((category, i) => (
+//                                     <button
+//                                         key={i}
+//                                         onClick={() => {
+//                                             setActiveTab(category.id);
+//                                             window.location.href = `#${category.id}`;
+//                                         }}
+//                                         className="block text-neutral-400 hover:text-white transition-colors text-sm hover:translate-x-1"
+//                                     >
+//                                         {category.name}
+//                                     </button>
+//                                 ))}
+//                             </div>
+//                         </div>
+
+//                         <div>
+//                             <h4 className="font-bold mb-6 text-lg" style={{ fontFamily: BRAND.fonts.heading }}>Contact Sales</h4>
+//                             <div className="space-y-3">
+//                                 <div className="flex items-center text-neutral-400">
+//                                     <Phone className="w-4 h-4 mr-2" />
+//                                     <span>+91 79424 52200</span>
+//                                 </div>
+//                                 <div className="flex items-center text-neutral-400">
+//                                     <Mail className="w-4 h-4 mr-2" />
+//                                     <span>sales@rekhagarments.com</span>
+//                                 </div>
+//                                 <div className="flex items-center text-neutral-400">
+//                                     <MapPin className="w-4 h-4 mr-2" />
+//                                     <span className="text-sm">Plot No. 27, GIDC Estate, Vadodara</span>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     </div>
+
+//                     <div className="border-t border-neutral-700/50 pt-8 text-center">
+//                         <p className="text-neutral-400 text-sm">
+//                             &copy; 2024 Rekha Garments. All rights reserved. | Comprehensive Apparel Manufacturing Specialists
+//                         </p>
+//                     </div>
+//                 </div>
+//             </footer>
+//         </div>
+//     );
+// }
+
+// export default function ProductCatalogPage() {
+//     return (
+//         <Suspense fallback={
+//             <div className="min-h-screen flex items-center justify-center bg-white">
+//                 <div className="text-center">
+//                     <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
+//                     <p className="text-neutral-600">Loading catalog...</p>
+//                 </div>
+//             </div>
+//         }>
+//             <ProductCatalogContent />
+//         </Suspense>
+//     );
+// }
