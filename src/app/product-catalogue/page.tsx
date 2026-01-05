@@ -309,6 +309,11 @@ function ProductCatalogContent() {
         { src: '/thunder_grey_polo.jpg', category: 'Polo Tshirts', name: 'Thunder Grey Polo Tshirts' },
         { src: '/white_polo.webp', category: 'Polo Tshirts', name: 'White Polo Tshirts' },
         { src: '/white_round_neck.webp', category: 'Round Neck Tshirts', name: 'White Round Neck Tshirts' },
+        { src: 'black_round_neck.gif', category: 'Round Neck Tshirts', name: 'Black Round Neck Tshirts' },
+        { src: 'blue_round_neck.jpg', category: 'Round Neck Tshirts', name: 'Blue Round Neck Tshirts' },
+        { src: 'red_round_neck.jpg', category: 'Round Neck Tshirts', name: 'Red Round Neck Tshirts' },
+        { src: 'yellow_round_neck.jpg', category: 'Round Neck Tshirts', name: 'Yellow Round Neck Tshirts' },
+        { src: 'ceil_round_neck.jpg', category: 'Round Neck Tshirts', name: 'Ceil Round Neck Tshirts' },
     ];
 
     return (
