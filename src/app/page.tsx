@@ -1264,7 +1264,7 @@ export default function Home() {
                 industry: "Retail",
                 quantity: "2,800 uniforms",
                 timeline: "6-week delivery",
-                outcome: "Standardized identity across 47 stores",
+                outcome: "Strict quality control is maintained to serve national retail chains reliably.",
                 challenge: "Multi-location delivery with seasonal staff onboarding",
                 icon: ShoppingBag
               },
