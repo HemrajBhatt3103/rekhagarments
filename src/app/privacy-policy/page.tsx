@@ -481,40 +481,42 @@ export default function PrivacyPolicy() {
                                 </div>
 
                                 {/* Section 11 */}
-                                <div className="relative">
-                                    <div className="absolute -left-8 top-0 w-1 h-full bg-gradient-to-b from-primary/20 via-accent/30 to-primary/20"></div>
-                                    <div className="ml-4">
-                                        <div className="flex items-center mb-6">
-                                            <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mr-4">
-                                                <span className="text-primary font-bold text-lg">11</span>
-                                            </div>
-                                            <h3 className="text-2xl font-bold text-primary" style={{ fontFamily: BRAND.fonts.heading }}>
-                                                Contact Information
-                                            </h3>
+                                <div className="relative flex flex-col items-center text-center">
+                                    <div className="flex flex-col items-center mb-8">
+                                        <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4">
+                                            <span className="text-primary font-bold text-xl">11</span>
                                         </div>
-                                        <div className="ml-14">
-                                            <p className="text-neutral-600 mb-6">
-                                                For any questions, concerns, or requests regarding this Privacy Policy,
-                                                please contact:
-                                            </p>
-                                            <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20">
-                                                <CardContent className="p-6">
-                                                    <h4 className="text-xl font-bold text-neutral-900 mb-4" style={{ fontFamily: BRAND.fonts.heading }}>
-                                                        <strong>Rekha Garments, Vadodara</strong>
-                                                    </h4>
-                                                    <div className="space-y-3">
-                                                        <div className="flex items-center">
-                                                            <Phone className="w-4 h-4 text-primary mr-3" />
-                                                            <span className="text-neutral-700">+91 94797 88000 / +91 94263 23279</span>
+                                        <h3 className="text-3xl font-bold text-primary" style={{ fontFamily: BRAND.fonts.heading }}>
+                                            Contact Information
+                                        </h3>
+                                    </div>
+
+                                    <div className="w-full max-w-xl px-4">
+                                        <p className="text-neutral-600 text-sm mb-8">
+                                            For any questions, concerns, or requests regarding this Privacy Policy,
+                                            please contact:
+                                        </p>
+                                        <Card className="bg-gradient-to-br from-primary/5 to-primary/10 border-primary/20 shadow-md overflow-hidden">
+                                            <CardContent className="p-6 sm:p-8">
+                                                <h4 className="text-xl font-bold text-neutral-900 mb-6" style={{ fontFamily: BRAND.fonts.heading }}>
+                                                    Rekha Garments, Vadodara
+                                                </h4>
+                                                <div className="space-y-4">
+                                                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                                                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 shrink-0">
+                                                            <Phone className="w-4 h-4 text-primary" />
                                                         </div>
-                                                        <div className="flex items-center">
-                                                            <Mail className="w-4 h-4 text-primary mr-3" />
-                                                            <span className="text-neutral-700">rekhagarments2007@yahoo.co.in</span>
-                                                        </div>
+                                                        <span className="text-neutral-700 text-sm sm:text-base font-medium">+91 94797 88000 / +91 94263 23279</span>
                                                     </div>
-                                                </CardContent>
-                                            </Card>
-                                        </div>
+                                                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                                                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 shrink-0">
+                                                            <Mail className="w-4 h-4 text-primary" />
+                                                        </div>
+                                                        <span className="text-neutral-700 text-sm sm:text-base font-medium break-all">rekhagarments2007@yahoo.co.in</span>
+                                                    </div>
+                                                </div>
+                                            </CardContent>
+                                        </Card>
                                     </div>
                                 </div>
 
