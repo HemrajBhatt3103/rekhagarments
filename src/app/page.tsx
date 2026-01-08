@@ -1386,7 +1386,7 @@ export default function Home() {
                     </div>
                     <div>
                       <div className="flex items-center">
-                        <span className="text-2xl font-bold text-neutral-900 mr-2">4.8</span>
+                        <span className="text-2xl font-bold text-neutral-900 mr-2">4.9</span>
                         <div className="flex">
                           {[...Array(5)].map((_, i) => (
                             <Star key={i} className="w-4 h-4 text-yellow-500 fill-current" />
@@ -1702,7 +1702,6 @@ export default function Home() {
                       <div className="font-semibold text-neutral-900 text-sm sm:text-base">Email</div>
                       <div className="space-y-0.5 sm:space-y-1">
                         <div className="text-neutral-600 text-xs sm:text-sm">contact@rekhagarments.com</div>
-                        <div className="text-neutral-600 text-xs sm:text-sm">support@rekhagarments.com</div>
                         <div className="text-neutral-600 text-xs sm:text-sm">rekhagarments2007@yahoo.co.in</div>
                       </div>
                       <div className="text-xs text-neutral-500 mt-1">Response within 24 hours</div>
