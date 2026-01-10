@@ -23,10 +23,10 @@ const BRAND = {
 const NAV_ITEMS = [
     { name: 'Home', href: '/' },
     { name: 'About', href: '/#about' },
-    { name: 'Leadership', href: '/#leadership' },
     { name: 'Solutions', href: '/#solutions' },
-    { name: 'Process', href: '/#process' },
-    { name: 'Product Catalogue', href: '/product-catalogue' },
+    { name: 'Catalogue', href: '/product-catalogue' },
+    { name: 'School', href: '/school-uniforms' },
+    { name: 'Festive', href: '/festive-clothing' },
     { name: 'Contact', href: '/#contact' },
 ];
 

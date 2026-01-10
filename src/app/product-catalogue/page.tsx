@@ -61,7 +61,7 @@ function ProductCatalogContent() {
     const tabsContainerRef = useRef<HTMLDivElement>(null);
     const galleryFiltersRef = useRef<HTMLDivElement>(null);
 
-    const whatsappMessage = "Hello! I'm interested in your product catalog and would like to request a quote."
+    const whatsappMessage = "Hello! I'm interested in your product catalogue and would like to request a quote."
     const whatsappUrl = `https://wa.me/919426323279?text=${encodeURIComponent(whatsappMessage)}`
 
     const searchParams = useSearchParams();
@@ -336,7 +336,7 @@ function ProductCatalogContent() {
     return (
         <div className="min-h-screen bg-white text-gray-900 selection:bg-primary/20 selection:text-primary overflow-x-hidden" style={{ fontFamily: BRAND.fonts.body }}>
             {/* Hero Section */}
-            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary/5 pt-20">
+            <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-neutral-50 via-white to-primary/5 pt-32">
                 <div className="absolute inset-0">
                     <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl animate-float"></div>
                     <div className="absolute bottom-1/3 right-1/4 w-80 h-80 bg-accent/5 rounded-full blur-3xl animate-float" style={{ animationDelay: '1.5s' }}></div>
@@ -366,7 +366,7 @@ function ProductCatalogContent() {
                             style={{ fontFamily: BRAND.fonts.heading }}
                         >
                             <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-neutral-900">
-                                Complete Product Catalog
+                                Complete Product Catalogue
                             </span>
                             <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-accent mt-2 sm:mt-4">
                                 Your Comprehensive Apparel Solution
@@ -395,9 +395,8 @@ function ProductCatalogContent() {
 
                             <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                                 <Button
-                                    variant="outline"
                                     size="lg"
-                                    className="bg-white/80 backdrop-blur-sm border-neutral-200/50 text-neutral-700 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg h-auto rounded-xl w-full sm:w-auto"
+                                    className="bg-white hover:bg-neutral-50 text-primary px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg h-auto rounded-xl shadow-xl shadow-primary/5 hover:shadow-2xl transition-all w-full sm:w-auto"
                                     onClick={() => window.open(whatsappUrl, '_blank')}
                                 >
                                     <span className="flex items-center justify-center sm:justify-start">
@@ -914,7 +913,7 @@ function ProductCatalogContent() {
                             Ready to Place Your Bulk Order?
                         </h2>
                         <p className="text-white/80 mb-6 sm:mb-8 max-w-2xl mx-auto text-base sm:text-lg">
-                            Get a custom quote for any product from our catalog. Our team will provide you with
+                            Get a custom quote for any product from our catalogue. Our team will provide you with
                             competitive pricing and detailed specifications.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -924,15 +923,14 @@ function ProductCatalogContent() {
                                 onClick={scrollToHomeContact}
                             >
                                 <FileText className="w-5 h-5 mr-2" />
-                                Request Complete Catalog & Quote
+                                Request Complete Catalogue & Quote
                             </Button>
                             <Button
                                 size="lg"
-                                variant="outline"
-                                className="border-white text-white hover:bg-white/10 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg w-full sm:w-auto"
+                                className="bg-white text-primary hover:bg-neutral-100 px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg w-full sm:w-auto"
                                 onClick={() => window.open(whatsappUrl, '_blank')}
                             >
-                                <MessageCircle className="w-5 h-5 mr-2" />
+                                <MessageCircle className="w-5 h-5 mr-2 text-green-600" />
                                 WhatsApp for Bulk Pricing
                             </Button>
                         </div>
@@ -1018,7 +1016,7 @@ export default function ProductCatalogPage() {
             <div className="min-h-screen flex items-center justify-center bg-white">
                 <div className="text-center">
                     <div className="w-16 h-16 border-4 border-primary/30 border-t-primary rounded-full animate-spin mx-auto mb-4"></div>
-                    <p className="text-neutral-600">Loading catalog...</p>
+                    <p className="text-neutral-600">Loading catalogue...</p>
                 </div>
             </div>
         }>
